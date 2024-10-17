@@ -2,13 +2,18 @@
 .Form {
     width: 100%;
     height: 100%;
-    padding: 30px;
     box-sizing: border-box;
+    padding-bottom:0px ;
 }
 .Form form{
     display: flex;
     flex-direction: column;
     gap:10px;
+}
+.Form button{
+    color: white;
+    background: #17A2B8;
+    border-radius: 50px;
 }
 
 .formField{
@@ -25,6 +30,8 @@
 .TextField:focus{
     outline: none;
 }
-
-
-
+.error{
+    font-size:small;
+    text-align: left;
+    color: #DB371F;
+}

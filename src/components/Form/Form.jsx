@@ -13,6 +13,7 @@ function FormField({ embeddedAvatar1, embeddedAvatar2, avatar, type, name, field
   const inputType = type === 'password' && isPasswordVisible ? 'text' : type; // Determine the input type
 
   return (
+    <>
     <div className={styles.formField}>
       {avatar && <img className={styles.imageBefore} src={avatar} alt={`${name} avatar`} />}
       <input
@@ -30,8 +31,9 @@ function FormField({ embeddedAvatar1, embeddedAvatar2, avatar, type, name, field
           onClick={handleTogglePasswordVisibility} // Toggle password visibility on click
         />
       )}
-      {fieldData.error && <span className={styles.error}>{fieldData.error}</span>}
     </div>
+      {fieldData.error && <span className={styles.error}>{fieldData.error}</span>}
+    </>
   );
 }
 
