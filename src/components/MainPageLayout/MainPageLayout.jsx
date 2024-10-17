@@ -1,22 +1,49 @@
 import styles from './MainPageLayout.module.css';
 import React from 'react'
-import { Link,Outlet } from 'react-router-dom';
+import { useLocation,useNavigate,Outlet } from 'react-router-dom';
 import {logo,Board,Analytics,Logout,Setting}  from '../../assets/MainLayoutComponent';
-function MainPageLayout() {
 
+function BodyElement({icon,name,link}){
+  const navigate = useNavigate();
+  return(
+    <div onClick={()=>navigate(link)} className={styles.element}>
+      <img src={icon} alt={`${icon}icon`}/>
+      <p>{name}</p>
+    </div>
+  )
+}
+
+function MainPageLayout() {
+  const headerelements =[
+    {icon:logo,name:"Pro Manage",link:"/dashboard"},
+  ]
+  const bodyelements = [
+    {icon:Board,name:"Board",link:"/dashboard"},
+    {icon:Analytics,name:"Analytics",link:"/analytics"},
+    {icon:Setting,name:"Settings",link:"/settings"},
+  ];
+  const footerelements = [
+    {icon:Logout,name:"Log out",link:"/dashboard"},
+  ]
+  const location = useLocation();
+  const currentRoute = location.pathname.split('/').pop(); 
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.header}>
-            <img src={logo} alt='logo'/>
-            <h3>Pro Manage</h3>
+        {headerelements.map((item,index)=>{
+            return (<BodyElement icon={item.icon} name={item.name} link={item.link} key={index}/>) 
+          })}
         </div>
         <div className={styles.body}>
-
+          {bodyelements.map((item,index)=>{
+            return (<BodyElement icon={item.icon} name={item.name} link={item.link} key={index}/>) 
+          })}
         </div>
         <div className={styles.footer}>
-
-        </div>
+        {footerelements.map((item,index)=>{
+            return (<BodyElement icon={item.icon} name={item.name} link={item.link} key={index}/>) 
+          })}        </div>
       </div>
       <div className={styles.right}>
         <Outlet/>

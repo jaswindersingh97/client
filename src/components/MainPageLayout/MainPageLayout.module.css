@@ -6,14 +6,23 @@
 }
 .left{
     height: 100%;
-    width: 20%;
+    width: 14%;
     box-sizing: border-box;
     border-right: 1px solid #EDF5FE;
     display: flex;
     flex-direction: column;
 }
 .header{
+    font-weight: bold;
+    font-size:large;
     color: black;
+}
+.element{
     display: flex;
-    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding-inline: 20px;
+}
+.footer{
+    color: #CF3636;
 }
