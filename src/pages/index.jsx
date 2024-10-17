@@ -1,5 +1,7 @@
-import Home from './Home/Home';
+import Dashboard from './Dashboard/Dashboard';
 import Register from './Register/Register';
 import SignIn from './SignIn/SignIn';
 import ErrorPage from './errorPage/ErrorPage';
-export {Home,Register,SignIn,ErrorPage}
+import SettingsPage from './SettingsPage/SettingsPage';
+import AnalyticsPage from './AnalyticsPage/AnalyticsPage';
+export {Dashboard,Register,SignIn,ErrorPage,SettingsPage,AnalyticsPage}
