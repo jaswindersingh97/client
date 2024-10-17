@@ -4,33 +4,6 @@ import Astronaut from './../../assets/AuthPage/Astronaut.svg';
 import Circle from './../../assets/AuthPage/Back.svg';
 import Form from '../Form/Form';
 function AuthPageLayout({fieldConfig=[{}],pageName="pagename",alternativeMessage="alternate message",alternateButton ={name:"button",onClick:()=>{}}}) {
-  const formField = [
-    {
-      name: 'username',
-      type: 'text',
-      avatar: 'avatar1.png',
-      embeddedavtar: '',
-      validate: (value) => value.trim().length > 0,
-      message: 'Username is required',
-    },
-    {
-      name: 'email',
-      type: 'email',
-      avatar: 'avatar2.png',
-      embeddedavtar: '',
-      validate: (value) => /\S+@\S+\.\S+/.test(value),
-      message: 'Invalid email format',
-    },
-    {
-      name: 'password',
-      type: 'password',
-      avatar: 'avatar3.png',
-      embeddedavtar: '',
-      validate: (value) => value.length >= 6,
-      message: 'Password must be at least 6 characters long',
-    }
-  ];
-  
   return (
     <div className={styles.container}>
       <div className={styles.left}>
