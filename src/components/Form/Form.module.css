@@ -1,9 +1,30 @@
-.container{
-    background: pink;
+
+.Form {
     width: 100%;
     height: 100%;
-    color: #343434;
+    padding: 30px;
     box-sizing: border-box;
+}
+.Form form{
     display: flex;
     flex-direction: column;
+    gap:10px;
 }
+
+.formField{
+    padding: 5px;
+    display: flex;
+    border: 1px, black,solid;
+    border-radius: 10px;
+}
+
+.TextField {
+    width: 100%;
+    border: none;
+}
+.TextField:focus{
+    outline: none;
+}
+
+
+

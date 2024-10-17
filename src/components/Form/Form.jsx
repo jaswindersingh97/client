@@ -16,6 +16,7 @@ function FormField({ embeddedAvatar1, embeddedAvatar2, avatar, type, name, field
     <div className={styles.formField}>
       {avatar && <img className={styles.imageBefore} src={avatar} alt={`${name} avatar`} />}
       <input
+        className={styles.TextField}
         type={inputType} // Use the determined input type
         value={fieldData.value || ''}
         onChange={(e) => setFieldData(name, e.target.value)}
