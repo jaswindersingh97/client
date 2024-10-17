@@ -37,7 +37,7 @@ function FormField({ embeddedAvatar1, embeddedAvatar2, avatar, type, name, field
   );
 }
 
-function Form({ fieldConfig, onSubmit }) {
+function Form({ fieldConfig,Button, onSubmit }) {
 
   const initializeFields = () => {
     const fields = {};
@@ -78,8 +78,7 @@ function Form({ fieldConfig, onSubmit }) {
       const formData = Object.fromEntries(
         Object.entries(fields).map(([key, data]) => [key, data.value])
       );
-      console.log("Form Submitted", formData);
-      onSubmit?.(formData); 
+      Button.onSubmit?.(formData); 
     }
   };
 
@@ -98,7 +97,7 @@ function Form({ fieldConfig, onSubmit }) {
             setFieldData={setFieldData}
           />
         ))}
-        <button type="submit">Submit</button>
+        <button type="submit">{Button.name}</button>
       </form>
     </div>       
   );

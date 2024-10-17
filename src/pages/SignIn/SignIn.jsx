@@ -7,6 +7,12 @@ function SignIn() {
         <AuthPageLayout
             pageName="Login"
             alternativeMessage="Have no account yet?"
+            Button={{
+                  name: "Log In",
+                  onSubmit: () => {
+                    alert("LogInpage");   
+                  },
+                }}
             alternateButton={{
                   name: "Register",
                   onClick: () => {

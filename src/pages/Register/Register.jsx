@@ -7,6 +7,12 @@ function Register() {
     <AuthPageLayout
       pageName="Register"
       alternativeMessage="Have an account?"
+      Button={{
+        name: "Register",
+        onSubmit: () => {
+          alert("LogInpage");   
+        },
+      }}
       alternateButton={{
         name: "Log in",
         onClick: () => {

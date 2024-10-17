@@ -3,7 +3,15 @@ import styles from './AuthPageLayout.module.css';
 import Astronaut from './../../assets/AuthPage/Astronaut.svg';
 import Circle from './../../assets/AuthPage/Back.svg';
 import Form from '../Form/Form';
-function AuthPageLayout({fieldConfig=[{}],pageName="pagename",alternativeMessage="alternate message",alternateButton ={name:"button",onClick:()=>{}}}) {
+function AuthPageLayout
+({
+  fieldConfig=[{}],
+  pageName="pagename",
+  alternativeMessage="alternate message",
+  Button ={name:"button",onsubmit:()=>{}},
+  alternateButton ={name:"button",onClick:()=>{}}
+  }) 
+{
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -21,7 +29,7 @@ function AuthPageLayout({fieldConfig=[{}],pageName="pagename",alternativeMessage
           <h1>{pageName}</h1>
         </div>
         <div className={styles.form}>
-        <Form fieldConfig={fieldConfig}/>
+        <Form Button={Button} fieldConfig={fieldConfig}/>
         </div>
         <div className={styles.base}>
           <p>{alternativeMessage}</p>
