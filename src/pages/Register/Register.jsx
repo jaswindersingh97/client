@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthPageLayout from '../../components/AuthPageLayout/AuthPageLayout'
+import { AuthPageLayout } from '../../components';
 import { fieldConfig } from '../../Forms/Register';
 function Register() {
   return (

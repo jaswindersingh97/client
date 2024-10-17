@@ -1,8 +1,4 @@
-import name from './../assets/FormComponents/Name.svg';
-import email from './../assets/FormComponents/email.svg';
-import password from './../assets/FormComponents/password.svg';
-import hidePassword from './../assets/FormComponents/hidePassword.svg';
-import unhidePassword from './../assets/FormComponents/unhidePassword.svg';
+import {name,email,password,hidePassword,unhidePassword} from './../assets/FormComponents';
 const fieldConfig = [
   {
     name: 'username',

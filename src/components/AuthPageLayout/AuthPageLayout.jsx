@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './AuthPageLayout.module.css';
-import Astronaut from './../../assets/AuthPage/Astronaut.svg';
-import Circle from './../../assets/AuthPage/Back.svg';
+import {Astronaut,Circle} from './../../assets/AuthPage/index';
 import Form from '../Form/Form';
 function AuthPageLayout
 ({

@@ -1,0 +1,19 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    box-sizing: border-box;
+}
+.left{
+    height: 100%;
+    width: 20%;
+    box-sizing: border-box;
+    border-right: 1px solid #EDF5FE;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    color: black;
+    display: flex;
+    justify-content: center;
+}
