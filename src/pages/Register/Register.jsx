@@ -1,5 +1,6 @@
 import React from 'react'
 import AuthPageLayout from '../../components/AuthPageLayout/AuthPageLayout'
+import { fieldConfig } from '../../Forms/Register';
 function Register() {
   return (
     <>
@@ -10,7 +11,8 @@ function Register() {
                 name:"button",onClick:()=>{
                     console.log("hi")
                     }
-                }}         
+                }}
+            fieldConfig = {fieldConfig}         
         />
     </>
   )
