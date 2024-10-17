@@ -1,0 +1,7 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: rgb(63, 165, 63);
+    display: flex;
+}
