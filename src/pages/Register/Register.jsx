@@ -4,16 +4,18 @@ import { fieldConfig } from '../../Forms/Register';
 function Register() {
   return (
     <>
-        <AuthPageLayout
-            pageName="Register"
-            alternativeMessage="alternate message"
-            alternateButton = {{
-                name:"button",onClick:()=>{
-                    console.log("hi")
-                    }
-                }}
-            fieldConfig = {fieldConfig}         
-        />
+    <AuthPageLayout
+      pageName="Register"
+      alternativeMessage="Have an account?"
+      alternateButton={{
+        name: "Log in",
+        onClick: () => {
+          alert("LogInpage"); // Corrected to call alert function directly
+        },
+      }}
+      fieldConfig={fieldConfig}
+      />
+
     </>
   )
 }
