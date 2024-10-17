@@ -26,9 +26,9 @@ function FormField({ embeddedAvatar1, embeddedAvatar2, avatar, type, name, field
       {embeddedAvatar1 && (
         <img
           className={styles.embeddedImage}
-          src={currentAvatar} // Use the current avatar based on visibility state
+          src={currentAvatar} 
           alt="embedded avatar"
-          onClick={handleTogglePasswordVisibility} // Toggle password visibility on click
+          onClick={handleTogglePasswordVisibility}
         />
       )}
     </div>
