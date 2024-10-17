@@ -1,16 +1,17 @@
 import React from 'react'
 import AuthPageLayout from '../../components/AuthPageLayout/AuthPageLayout'
-import { fieldConfig } from '../../Forms/Register';
+import { fieldConfig } from '../../Forms/SignIn';
 function SignIn() {
   return (
     <>
         <AuthPageLayout
-            pageName="SignIn"
-            alternativeMessage="alternate message"
-            alternateButton = {{
-                name:"button",onClick:()=>{
-                    console.log("hi")
-                    }
+            pageName="Login"
+            alternativeMessage="Have no account yet?"
+            alternateButton={{
+                  name: "Register",
+                  onClick: () => {
+                    alert("signUpPage");
+                  },
                 }}
             fieldConfig = {fieldConfig}         
         />

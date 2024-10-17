@@ -10,7 +10,7 @@ function Register() {
       alternateButton={{
         name: "Log in",
         onClick: () => {
-          alert("LogInpage"); // Corrected to call alert function directly
+          alert("LogInpage");   
         },
       }}
       fieldConfig={fieldConfig}
