@@ -1,6 +1,6 @@
 import styles from './Dashboard.module.css';
 import React, { useState } from 'react'
-
+import { AddPeople } from '../../assets/DashboardPageComponents';
 function Dashboard() {
   const user ={name:"jaswinder"}
   const filterHandle = (e) => {
@@ -21,6 +21,10 @@ function Dashboard() {
     </div>
     <div className={styles.subHeading}>
       <h2>Board</h2>
+      <div className={styles.AddPeople}>
+        <img src={AddPeople} alt='Add People'/>
+        <p>Add People</p>
+      </div>
       <select defaultValue={selectedValue} onChange={filterHandle}>
       {Options.map((item,index)=>(
         <option key={index} value={item.value}>{item.title}</option>
@@ -28,7 +32,7 @@ function Dashboard() {
       </select>
     </div>
     <div className={styles.body}>
-
+      
     </div>
   </div>
   )

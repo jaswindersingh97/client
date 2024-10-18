@@ -4,7 +4,6 @@
     box-sizing: border-box;
     padding-inline: 30px;
 }
-
 .header h4{
     margin: 0px;
     color: #707070;
@@ -13,9 +12,21 @@
 .subHeading{
     justify-content: space-between;
     display: flex;
+    align-items: center;
 }
 .subHeading h2{
     margin: 0px;
+}
+.AddPeople{
+    padding-left: 30px;
+    margin-right: auto;
+    display: flex;
+    color: #707070;
+    gap: 5px;
+    cursor: pointer;
+}
+.AddPeople:hover{
+    text-decoration: underline;
 }
 .subHeading select{
     border: none;
