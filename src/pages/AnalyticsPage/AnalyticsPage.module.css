@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-inline: 30px;
+}
+.Item{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    height: 25px;
+}
+.body{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+.Item span{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.Item h4{
+    margin-left: auto;
+}
