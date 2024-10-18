@@ -1,0 +1,16 @@
+.card{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.left_upperheader{
+    display: flex;
+}
+.priority div {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+.priority p {
+}

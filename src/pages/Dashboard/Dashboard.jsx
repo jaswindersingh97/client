@@ -1,6 +1,7 @@
 import styles from './Dashboard.module.css';
 import React, { useState } from 'react'
 import { AddPeople } from '../../assets/DashboardPageComponents';
+import { TaskLayout } from '../../components';
 function Dashboard() {
   const user ={name:"jaswinder"}
   const filterHandle = (e) => {
@@ -32,7 +33,7 @@ function Dashboard() {
       </select>
     </div>
     <div className={styles.body}>
-      
+      <TaskLayout/>
     </div>
   </div>
   )
