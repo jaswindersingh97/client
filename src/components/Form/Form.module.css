@@ -35,3 +35,8 @@
     text-align: left;
     color: #DB371F;
 }
+.embeddedImage{
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+}
