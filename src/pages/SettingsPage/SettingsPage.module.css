@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-inline: 30px;
+}
+.body{
+    width: 400px;
+}

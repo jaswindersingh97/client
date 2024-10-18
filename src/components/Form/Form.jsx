@@ -37,7 +37,7 @@ function FormField({ embeddedAvatar1, embeddedAvatar2, avatar, type, name, field
   );
 }
 
-function Form({ fieldConfig,Button, onSubmit }) {
+function Form({ fieldConfig,Button }) {
 
   const initializeFields = () => {
     const fields = {};
@@ -85,7 +85,7 @@ function Form({ fieldConfig,Button, onSubmit }) {
   return (
     <div className={styles.Form}>
       <form onSubmit={handleSubmit}>  
-        {fieldConfig.map(({ name, type, avatar, embeddedAvatar,embeddedAvatar1,embeddedAvatar2 }, index) => (
+        {fieldConfig.map(({ name, type, avatar,embeddedAvatar1,embeddedAvatar2 }, index) => (
           <FormField 
             key={index}
             avatar={avatar}

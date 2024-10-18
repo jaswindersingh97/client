@@ -19,7 +19,7 @@
 .formField{
     padding: 5px;
     display: flex;
-    border: 1px, black,solid;
+    border: 1px, #D0D0D0 ,solid;
     border-radius: 10px;
 }
 
