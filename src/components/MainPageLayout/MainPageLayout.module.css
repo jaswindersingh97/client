@@ -6,7 +6,7 @@
 }
 .left{
     height: 100%;
-    width: 14%;
+    width: 20%;
     box-sizing: border-box;
     border-right: 1px solid #EDF5FE;
     display: flex;
@@ -22,7 +22,15 @@
     gap: 10px;
     text-align: center;
     padding-inline: 20px;
+    cursor: pointer;
 }
-.footer{
+.body>div:hover{
+    background-color: aqua;
+}
+.footer{  
+    margin-top: auto;
     color: #CF3636;
+}
+.footer:hover{
+    background-color: #b87878;
 }
