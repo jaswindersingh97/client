@@ -1,11 +1,11 @@
 import {name,email,password,hidePassword,unhidePassword} from './../assets/FormComponents';
 const fieldConfig = [
   {
-    name: 'username',
+    name: 'name',
     type: 'text',
     avatar: name,
-    validate: (value) => value.trim().length > 0,
-    message: 'Username is required',
+    validate: (value) => value.trim().length > 3,
+    message: 'Username should be at least 3 digits',
   },
   {
     name: 'email',

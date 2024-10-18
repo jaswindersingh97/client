@@ -2,17 +2,19 @@ import React from 'react';
 import styles from './AuthPageLayout.module.css';
 import {Astronaut,Circle} from './../../assets/AuthPage/index';
 import Form from '../Form/Form';
+import { ToastContainer } from 'react-toastify';
 function AuthPageLayout
 ({
   fieldConfig=[{}],
   pageName="pagename",
   alternativeMessage="alternate message",
-  Button ={name:"button",onsubmit:()=>{}},
+  Button ={name:"button",onsubmit:(formData)=>{}},
   alternateButton ={name:"button",onClick:()=>{}}
   }) 
 {
   return (
     <div className={styles.container}>
+    <ToastContainer/>
       <div className={styles.left}>
         <div className={styles.images}>
           <img className={styles.Astronaut} src={Astronaut} alt="Astronaut"/>

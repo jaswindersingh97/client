@@ -1,7 +1,28 @@
 import React from 'react'
 import { AuthPageLayout } from '../../components';
 import { fieldConfig } from '../../Forms/SignIn';
+import { useNavigate } from 'react-router-dom';
+import { apiRequest } from '../../Apis';
+import { toast } from 'react-toastify';
 function SignIn() {
+  const navigate = useNavigate();
+  const onSubmit = async (formData) => {
+    const endpoint = '/auth/login';
+    const method = 'post';
+    const { confirmPassword, ...data } = formData; 
+
+    const response = await apiRequest({ endpoint, method, data });
+    const { message, error } = response.data;
+
+    if (message) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
+    } 
+    else if (error) {
+        toast.error(error);
+    }
+};
+
   return (
     <>
         <AuthPageLayout
@@ -9,14 +30,12 @@ function SignIn() {
             alternativeMessage="Have no account yet?"
             Button={{
                   name: "Log In",
-                  onSubmit: () => {
-                    alert("LogInpage");   
-                  },
+                  onSubmit:onSubmit,
                 }}
             alternateButton={{
                   name: "Register",
                   onClick: () => {
-                    alert("signUpPage");
+                    navigate("/register");
                   },
                 }}
             fieldConfig = {fieldConfig}         

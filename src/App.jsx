@@ -1,5 +1,6 @@
 import './App.css'
 import React from 'react'
+import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { SignIn,Register , ErrorPage, Dashboard, AnalyticsPage, SettingsPage} from './pages';
 import { MainPageLayout } from './components';
