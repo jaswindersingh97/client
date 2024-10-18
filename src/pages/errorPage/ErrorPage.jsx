@@ -1,9 +1,17 @@
 import React from 'react'
-import styles from './index.module.css';
+import styles from './Error.module.css';
+import { Link } from 'react-router-dom';
 function ErrorPage() {
   return (
     <div className={styles.container}>
-      <h1>Error 404</h1>
+    <div className={styles.header}>
+      <h1>404</h1>
+      <h2>We couldn't find this Page.</h2>
+    </div>
+    <div className={styles.body}>
+      <p>Click the Button to go the dashboard</p>
+      <Link to={'/dashboard'}><button>Dashboard</button></Link>
+    </div>
     </div>
   )
 }
