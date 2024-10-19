@@ -16,6 +16,7 @@ function SignIn() {
 
     if (message) {
         localStorage.setItem("token", response.data.token);
+        toast.success(message);
         navigate("/dashboard");
     } 
     else if (error) {
