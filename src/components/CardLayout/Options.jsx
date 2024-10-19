@@ -1,7 +1,8 @@
 import styles from './Options.module.css';
 import { optionButton } from './../../assets/DashboardPageComponents';
 import { useState } from 'react';
-function Options({OptionsLst}) {
+import OptionsLst from '../../ComponentUtils/OptionLst';
+function Options() {
     const [visible, setVisible] = useState(false);
     const toggleVisible = (status) => {
       setVisible(status);

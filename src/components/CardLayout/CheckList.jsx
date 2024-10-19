@@ -3,18 +3,18 @@ import React, { useState } from 'react';
 import { DownArrow, UpArrow } from '../../assets/DashboardPageComponents';
 import axios from 'axios';  // Import axios for API calls
 
-function CheckList() {
-  const [expanded, setExpanded] = useState(false);
-  const [checklist, setChecklist] = useState([
-    { id: 1, status: true, task: "Task to be done" },
-    { id: 2, status: false, task: "Task to be done" },
-    { id: 3, status: false, task: "Task to be done" },
-  ]);
+function CheckList({expandHandler,checklist,setChecklist,expanded}) {
+  // const [expanded, setExpanded] = useState(false);
+  // const [checklist, setChecklist] = useState([
+  //   { id: 1, status: true, task: "Task to be done" },
+  //   { id: 2, status: false, task: "Task to be done" },
+  //   { id: 3, status: false, task: "Task to be done" },
+  // ]);
 
-  // Toggles expanded state
-  const expandHandler = () => {
-    setExpanded(!expanded);
-  };
+  // // Toggles expanded state
+  // const expandHandler = () => {
+  //   setExpanded(!expanded);
+  // };
 
   // API call to update task status
   const updateTaskStatus = async (taskId, newStatus) => {

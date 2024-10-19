@@ -2,6 +2,7 @@ import styles from './TaskLayout.module.css';
 import { useState } from 'react';
 import Options from './Options';
 import CheckList from './CheckList';
+import otherStatus from '../../ComponentUtils/Statuses';
 function TaskLayout() {
     const Task = {}
     const background = '#FF2473';
@@ -14,27 +15,13 @@ function TaskLayout() {
     const changeStatus = () =>{
       alert("button clked")
     }
-    const statuses = [
-      {id:1 , name:'TO-DO' ,title:'To Do'},
-      {id:2 , name:'PROGRESS' ,title:'Progress'},
-      {id:3 , name:'BACKLOG' ,title:'Backlog'},
-      {id:4 , name:'DONE' ,title:'Done'},
-    ];
-    const possibleStatus = statuses.filter((item)=> item.id !==currentStatusId);
-    const [checklist,setCheckelist] = useState([
-      {status:true,task:"Task to be done"},
-      {status:false,task:"Task to be done"},
-      {status:false,task:"Task to be done"},
+    const possibleStatus = otherStatus(currentStatusId);
+    const [checklist, setChecklist] = useState([
+      { id: 1, status: true, task: "Task to be done" },
     ]);
     const expandHandler = () =>{
       setExpanded(!expanded);
     }
-    const handleclk = () => alert("button clicked");    // dummy function for the options button
-    const OptionsLst = [
-      { name: 'Share', onClick: handleclk },
-      { name: 'Edit', onClick: handleclk },
-      { name: 'Delete', color: '#CF3636', onClick: handleclk }
-    ];
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -45,7 +32,7 @@ function TaskLayout() {
             <span>{initials}</span>
           </div>
             <div className={styles.Options}>
-            <Options OptionsLst={OptionsLst}/>
+            <Options/>
             </div>
         </div>
         <div className={styles.lowerheader}>
@@ -53,7 +40,12 @@ function TaskLayout() {
         </div>
       </div>
       <div className={styles.body}>
-      <CheckList/>
+      <CheckList 
+        expandHandler = {expandHandler} 
+        checklist ={checklist}
+        setChecklist={setChecklist}
+        expanded = {expanded}
+        />
       </div>
       <div className={styles.footer}>
       {DueDate && <button className={`${styles.footerButtons} ${styles.DueDate}`}>{DueDate}</button>}
