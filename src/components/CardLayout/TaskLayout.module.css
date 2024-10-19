@@ -1,14 +1,66 @@
-.card{
-    width: 400px;
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+    gap: .625rem;
+}
+.header{
     display: flex;
     flex-direction: column;
 }
-
+.upperheader{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 38px;
+}
 .left_upperheader{
     display: flex;
+    gap: 10px;
+    align-items: center;
 }
-.priority div {
-    width: 9px;
-    height: 9px;
+.left_upperheader p{
+    margin: 0px;
+}
+.left_upperheader span{
+    padding: 10px;
+    background-color: #FFEBEB;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
+    line-height: 1;
+}
+.left_upperheader div{
+    width: 18px;
+    height: 18px;
+    border-radius:50% ;
+}
+.Options{
+    height: 34px;
+    margin-left: auto;
+    position: relative;
+}
+
+.footerButtons{
+    background-color: #EEECEC;
+    height: 26px;
+    font-size: 10px;
+}
+.DueDate{
+    background: #CF3636;
+    color: white;
+}
+.footer{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.footer div{
+
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+
 }

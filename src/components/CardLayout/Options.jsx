@@ -3,34 +3,36 @@ import { optionButton } from './../../assets/DashboardPageComponents';
 import { useState } from 'react';
 function Options({OptionsLst}) {
     const [visible, setVisible] = useState(false);
-    
     const toggleVisible = (status) => {
       setVisible(status);
     };
     return (
-      <span
+      <div
         onMouseEnter={() => toggleVisible(true)}
         onMouseLeave={() => toggleVisible(false)}
         className={styles.dropdown}
       >
-        <span className={styles.icon}>
+        <span 
+        className={styles.icon}
+        >
           <img src={optionButton} alt="optionButton" />
         </span>
-        <div
-          style={{ display: `${visible ? 'block' : 'none'}` }}
+        <span
+          style={{ display: `${visible ? 'flex' : 'none'}` }}
           className={styles.OptionsLst}
         >
           {OptionsLst.map((item, index) => (
-            <div
+            <span
+              className={styles.select}
               onClick={item.onClick}
               key={index}
               style={{ color: item.color || 'black', cursor: 'pointer' }}
             >
               {item.name}
-            </div>
+            </span>
           ))}
-        </div>
-      </span>
+        </span>
+      </div>
     );
   }
 export default Options;
