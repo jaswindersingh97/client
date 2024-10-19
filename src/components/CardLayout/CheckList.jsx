@@ -4,7 +4,7 @@ import { DownArrow, UpArrow } from '../../assets/DashboardPageComponents';
 import axios from 'axios';  // Import axios for API calls
 
 function CheckList() {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const [checklist, setChecklist] = useState([
     { id: 1, status: true, task: "Task to be done" },
     { id: 2, status: false, task: "Task to be done" },
@@ -43,11 +43,12 @@ function CheckList() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      <div
+          onClick={expandHandler} 
+      className={styles.header}>
         <p>Checklist ({completedCount}/{checklist.length})</p>
         <img 
-          src={expanded ? DownArrow : UpArrow} 
-          onClick={expandHandler} 
+          src={expanded ? UpArrow : DownArrow} 
           alt={expanded ? 'Collapse checklist' : 'Expand checklist'}
           className={styles.expanded} 
         />
