@@ -1,8 +1,13 @@
 import styles from './Dashboard.module.css';
 import React, { useState } from 'react'
 import { AddPeople } from '../../assets/DashboardPageComponents';
-import { TaskLayout } from '../../components';
+import Modal from '../../components/Modal/Modal';
 function Dashboard() {
+  //To be used for overlay component
+  // const [isModalOpen, setModalOpen] = useState(false);
+  // const openModal = () => setModalOpen(true);
+  // const closeModal = () => setModalOpen(false);
+
   const user ={name:"jaswinder"}
   const filterHandle = (e) => {
     setSelectedValue(e.target.value)
@@ -33,7 +38,10 @@ function Dashboard() {
       </select>
     </div>
     <div className={styles.body}>
-      <TaskLayout/>
+    {/* <div>
+      <button onClick={openModal}>Open Modal</button>
+      <Modal isOpen={isModalOpen} onClose={closeModal}  />
+    </div> */}
     </div>
   </div>
   )

@@ -1,7 +1,6 @@
 .container{
     display: flex;
     flex-direction: column;
-    width: 750px;
     gap: .625rem;
 }
 .header{
@@ -36,7 +35,8 @@
     border-radius:50% ;
 }
 .Options{
-    height: 34px;
+    width: 20px;
+    height: 38px;
     margin-left: auto;
     position: relative;
 }
@@ -58,9 +58,7 @@
     justify-content: space-between;
 }
 .footer div{
-
     flex-wrap: wrap;
     gap: 10px;
     display: flex;
-
 }
