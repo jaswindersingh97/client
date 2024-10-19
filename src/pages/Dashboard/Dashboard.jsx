@@ -2,6 +2,7 @@ import styles from './Dashboard.module.css';
 import React, { useState } from 'react'
 import { AddPeople } from '../../assets/DashboardPageComponents';
 import Modal from '../../components/Modal/Modal';
+import CardLayout from '../../components/CardLayout/CardLayout';
 function Dashboard() {
   //To be used for overlay component
   // const [isModalOpen, setModalOpen] = useState(false);
@@ -42,6 +43,7 @@ function Dashboard() {
       <button onClick={openModal}>Open Modal</button>
       <Modal isOpen={isModalOpen} onClose={closeModal}  />
     </div> */}
+    <CardLayout/>
     </div>
   </div>
   )
