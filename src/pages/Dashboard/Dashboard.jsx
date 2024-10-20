@@ -7,6 +7,7 @@ import Options from './../../ComponentUtils/DateFilter';
 import CardLayout from '../../components/CardLayout/CardLayout';
 import CreateTask from '../../components/CreateTask/CreateTask';
 import { toast } from 'react-toastify';
+import SearchUser from '../../components/MiniComponents/SearchUser/SearchUser';
 // import CardGrid from '../../components/CardLayout/CardGrid';
 function Dashboard() {
   const {selectedValue,filterHandle,token,user,getUser} = useContext(AppContext);
@@ -33,9 +34,10 @@ function Dashboard() {
       </select>
     </div>
     <div className={styles.body}>
-    <CreateTask/>
+    {/* <CreateTask/> */}
     {/* <CardLayout/> */}
     {/* <CardGrid/> */}
+    <SearchUser/>
     </div>
   </div>
   )
