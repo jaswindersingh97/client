@@ -1,31 +1,19 @@
 import styles from './Dashboard.module.css';
-import React, { useState } from 'react'
+import formatDate from './../../Utils/formatDate';
+import {AppContext} from './../../Context/AppContext';
+import React, { useState , useContext } from 'react'
 import { AddPeople } from '../../assets/DashboardPageComponents';
-import Modal from '../../components/Modal/Modal';
-import CardLayout from '../../components/CardLayout/CardLayout';
-import CardGrid from '../../components/CardLayout/CardGrid';
+import Options from './../../ComponentUtils/DateFilter';
+// import CardLayout from '../../components/CardLayout/CardLayout';
+// import CardGrid from '../../components/CardLayout/CardGrid';
 function Dashboard() {
-  //To be used for overlay component
-  // const [isModalOpen, setModalOpen] = useState(false);
-  // const openModal = () => setModalOpen(true);
-  // const closeModal = () => setModalOpen(false);
-
+  const {selectedValue,filterHandle} = useContext(AppContext);
   const user ={name:"jaswinder"}
-  const filterHandle = (e) => {
-    setSelectedValue(e.target.value)
-  }
-  const date = '12th Jan, 2024'
-  const Options = [
-    {value:1,title:'Today'},
-    {value:7,title:'This Week'},
-    {value:30,title:'This Month'},
-  ]
-  const [selectedValue,setSelectedValue] = useState(7);
   return (
     <div className={styles.container}>
     <div className={styles.header}>
       <h3>Welcome! {user.name}</h3>
-      <h4>{date}</h4>
+      <h4>{formatDate(new Date())}</h4>
     </div>
     <div className={styles.subHeading}>
       <h2>Board</h2>
@@ -40,10 +28,6 @@ function Dashboard() {
       </select>
     </div>
     <div className={styles.body}>
-    {/* <div>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal isOpen={isModalOpen} onClose={closeModal}  />
-    </div> */}
     <CardLayout/>
     {/* <CardGrid/> */}
     </div>
