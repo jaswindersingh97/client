@@ -12,6 +12,4 @@ function formatDate(date) {
   
     return `${day}${suffix} ${month}, ${year}`;
   }
-  
-
 export default formatDate;  

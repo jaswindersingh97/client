@@ -1,10 +1,10 @@
 import styles from './Dashboard.module.css';
 import formatDate from './../../Utils/formatDate';
 import {AppContext} from './../../Context/AppContext';
-import React, { useState , useContext } from 'react'
+import React, { useContext } from 'react'
 import { AddPeople } from '../../assets/DashboardPageComponents';
 import Options from './../../ComponentUtils/DateFilter';
-// import CardLayout from '../../components/CardLayout/CardLayout';
+import CardLayout from '../../components/CardLayout/CardLayout';
 // import CardGrid from '../../components/CardLayout/CardGrid';
 function Dashboard() {
   const {selectedValue,filterHandle} = useContext(AppContext);
