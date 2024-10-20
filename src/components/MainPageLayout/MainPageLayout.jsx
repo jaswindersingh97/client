@@ -1,7 +1,6 @@
 import styles from './MainPageLayout.module.css';
 import { useState } from 'react'
 import { useNavigate,Outlet } from 'react-router-dom';
-// import {headerelements,bodyelements,footerelements} from './../../ComponentUtils/LeftNavLst';
 import {logo,Board,Analytics,Logout,Setting}  from '../../assets/MainLayoutComponent';
 import { Modal} from '../';
 
@@ -10,7 +9,6 @@ function DummyComponent (){
     <div></div>
   )
 }
-
 function BodyElement({icon,name,link,onClick}){
   const navigate = useNavigate();
   return(

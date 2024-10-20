@@ -1,8 +1,4 @@
 import {logo,Board,Analytics,Logout,Setting}  from './../assets/MainLayoutComponent';
-// import { AppContext } from '../Context/AppContext';
-// import { useContext } from 'react';
-
-// const {openModal} = useContext(AppContext);
 const headerelements =[
     {icon:logo,name:"Pro Manage",link:"/dashboard"},
   ];
