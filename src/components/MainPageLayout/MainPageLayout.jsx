@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate,Outlet } from 'react-router-dom';
 import {logo,Board,Analytics,Logout,Setting}  from '../../assets/MainLayoutComponent';
 import { Modal} from '../';
-
+import { ToastContainer } from 'react-toastify';
 function DummyComponent (){
   return(
     <div></div>
@@ -58,6 +58,7 @@ function MainPageLayout() {
         <Outlet/>
       </div>
       <Modal isOpen={isModalOpen} Component={DummyComponent} onClose={closeModal}/>
+      <ToastContainer/>
     </div>
   )
 }

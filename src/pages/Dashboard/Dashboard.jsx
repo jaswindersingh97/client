@@ -6,11 +6,13 @@ import { AddPeople } from '../../assets/DashboardPageComponents';
 import Options from './../../ComponentUtils/DateFilter';
 import CardLayout from '../../components/CardLayout/CardLayout';
 import CreateTask from '../../components/CreateTask/CreateTask';
+import { toast } from 'react-toastify';
 // import CardGrid from '../../components/CardLayout/CardGrid';
 function Dashboard() {
   const {selectedValue,filterHandle,token,user,getUser} = useContext(AppContext);
   useEffect(()=>{
     getUser();
+    toast.success("userLoaded successfully")
   },[token]);
   return (
     <div className={styles.container}>
