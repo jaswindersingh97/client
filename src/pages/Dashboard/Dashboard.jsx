@@ -1,14 +1,17 @@
 import styles from './Dashboard.module.css';
 import formatDate from './../../Utils/formatDate';
 import {AppContext} from './../../Context/AppContext';
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AddPeople } from '../../assets/DashboardPageComponents';
 import Options from './../../ComponentUtils/DateFilter';
 import CardLayout from '../../components/CardLayout/CardLayout';
+import CreateTask from '../../components/CreateTask/CreateTask';
 // import CardGrid from '../../components/CardLayout/CardGrid';
 function Dashboard() {
-  const {selectedValue,filterHandle} = useContext(AppContext);
-  const user ={name:"jaswinder"}
+  const {selectedValue,filterHandle,token,user,getUser} = useContext(AppContext);
+  useEffect(()=>{
+    getUser();
+  },[token]);
   return (
     <div className={styles.container}>
     <div className={styles.header}>
@@ -28,7 +31,8 @@ function Dashboard() {
       </select>
     </div>
     <div className={styles.body}>
-    <CardLayout/>
+    <CreateTask/>
+    {/* <CardLayout/> */}
     {/* <CardGrid/> */}
     </div>
   </div>
