@@ -27,13 +27,14 @@ function CardGrid() {
   const updateTaskStatus = async (taskId, newStatus) => {
     // Make API call to update the task's status
     await apiRequest({
-      endpoint: `/secure/updateTaskStatus/${taskId}`,
-      method: 'put',
+      endpoint: `/secure/updateStatus`,
+      method: 'patch',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
-      body: {
-        status: newStatus,
+      data: {
+        TaskId: taskId,
+        Status: newStatus,
       },
     });
     // Update local state after successful API call
