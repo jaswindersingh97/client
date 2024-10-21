@@ -1,25 +1,13 @@
 import styles from './CheckList.module.css';
-import React, { useState } from 'react';
+import React from 'react'; // No need for useState as it's in TaskLayout
 import { DownArrow, UpArrow } from '../../assets/DashboardPageComponents';
 import axios from 'axios';  // Import axios for API calls
 
-function CheckList({expandHandler,checklist,setChecklist,expanded}) {
-  // const [expanded, setExpanded] = useState(false);
-  // const [checklist, setChecklist] = useState([
-  //   { id: 1, status: true, task: "Task to be done" },
-  //   { id: 2, status: false, task: "Task to be done" },
-  //   { id: 3, status: false, task: "Task to be done" },
-  // ]);
-
-  // // Toggles expanded state
-  // const expandHandler = () => {
-  //   setExpanded(!expanded);
-  // };
-
-  // API call to update task status
-  const updateTaskStatus = async (taskId, newStatus) => {
+function CheckList({ taskId, expandHandler, checklist, setChecklist, expanded }) {
+  
+  const updateTaskStatus = async (itemId, newStatus) => {
     // try {
-    //   await axios.put(`/api/tasks/${taskId}`, { status: newStatus });
+    //   await axios.put(`/api/tasks/${taskId}/checklist/${itemId}`, { status: newStatus });
     //   console.log("Task status updated successfully");
     // } catch (error) {
     //   console.error("Failed to update task status", error);
@@ -43,9 +31,7 @@ function CheckList({expandHandler,checklist,setChecklist,expanded}) {
 
   return (
     <div className={styles.container}>
-      <div
-          onClick={expandHandler} 
-      className={styles.header}>
+      <div onClick={expandHandler} className={styles.header}>
         <p>Checklist ({completedCount}/{checklist.length})</p>
         <img 
           src={expanded ? UpArrow : DownArrow} 
@@ -57,12 +43,13 @@ function CheckList({expandHandler,checklist,setChecklist,expanded}) {
       {expanded && (
         <div className={styles.body}>
           {checklist.map((item, index) => (
-            <div
-                onClick={() => changeStatus(index)} 
-            key={index} className={styles.item}>
+            <div 
+            key={index} 
+            className={styles.item}
+            >
               <input 
                 type="checkbox" 
-                checked={item.status} 
+                checked={item.status ?? false} 
                 onChange={() => changeStatus(index)} 
                 className={styles.checkbox}
               />

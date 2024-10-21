@@ -50,9 +50,25 @@
     font-size: 10px;
 }
 .DueDate{
-    background: #CF3636;
-    color: white;
+    background: #DBDBDB;
+    color: black;
+    cursor:auto;
 }
+.greenButton {
+    background-color: green;
+    color: white;
+  }
+  
+  .redButton {
+    background-color:#CF3636;
+    color: white;
+  }
+  
+  .silverButton {
+    background-color: silver;
+    color: black;
+  }
+  
 .footer{
     display: flex;
     gap: 10px;
