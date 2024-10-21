@@ -7,26 +7,23 @@ import priorityArray from './../../ComponentUtils/Prioritylist';
 import generateInitials from './../../Utils/generateInitials';
 import { shortDate } from '../../Utils/formatDate';
 
-function TaskLayout({ task, collapseAll,updateTaskStatus }) {
-  const { _id, title, priority, assignedTo, status, checklist: initialChecklist,dueDate } = task;
+function TaskLayout({ task, collapseAll, updateTaskStatus, updateTaskChecklist }) {
+  const { _id, title, priority, assignedTo, status, checklist: initialChecklist, dueDate } = task;
   const date = shortDate(new Date(dueDate));
-  const initials = generateInitials(assignedTo[0]);
+  const initials = assignedTo.length > 0 && assignedTo[0]?.name ? generateInitials(assignedTo[0].name) : "";
   const { priorityname, prioritycolor } = priorityArray[priority];
   const [expanded, setExpanded] = useState(false);
-  const [checklist, setChecklist] = useState(initialChecklist || []); // Initialize checklist state
-  // const dueDate = "feb 10th"; // Example due date
-  
-  const possibleStatus = otherStatus(status);
 
   useEffect(() => {
-    setExpanded(!collapseAll); // Adjust expanded state when collapseAll changes
+    setExpanded(!collapseAll);
   }, [collapseAll]);
 
   const expandHandler = () => {
-    setExpanded(!expanded); // Local expand/collapse toggle
+    setExpanded(!expanded);
   };
+
   const handleStatusChange = (newStatus) => {
-    updateTaskStatus(_id, newStatus); // Call the function from CardGrid to update status
+    updateTaskStatus(_id, newStatus);
   };
 
   return (
@@ -50,21 +47,25 @@ function TaskLayout({ task, collapseAll,updateTaskStatus }) {
         <CheckList 
           taskId={_id}
           expandHandler={expandHandler}
-          checklist={checklist}
-          setChecklist={setChecklist}  
+          checklist={initialChecklist}
+          setChecklist={(updatedChecklist) => updateTaskChecklist(_id, updatedChecklist)}
           expanded={expanded}
         />
       </div>
       <div className={styles.footer}>
-        {dueDate && <button className={`${styles.footerButtons} ${
-      status === 4 
-        ? styles.greenButton 
-        : (new Date(dueDate) < new Date() || priority === 4)
-        ? styles.redButton 
-        : styles.silverButton
-    }`}>{date}</button>}
+        {dueDate && (
+          <button className={`${styles.footerButtons} ${
+            status === 4
+              ? styles.greenButton
+              : (new Date(dueDate) < new Date() || priority === 4)
+              ? styles.redButton
+              : styles.silverButton
+          }`}>
+            {date}
+          </button>
+        )}
         <div>
-          {possibleStatus.map((item, index) => (
+          {otherStatus(status).map((item, index) => (
             <button key={index} className={styles.footerButtons} onClick={() => handleStatusChange(item.id)}>
               {item.name}
             </button>

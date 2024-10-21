@@ -45,6 +45,15 @@ function CardGrid() {
     );
   };
 
+  // Update checklist in taskData
+  const updateTaskChecklist = (taskId, updatedChecklist) => {
+    setTaskData(prevTasks =>
+      prevTasks.map(task =>
+        task._id === taskId ? { ...task, checklist: updatedChecklist } : task
+      )
+    );
+  };
+
   const tasksByStatus = statuses.reduce((acc, status) => {
     acc[status.id] = taskData.filter(task => task.status === status.id);
     return acc;
@@ -58,7 +67,8 @@ function CardGrid() {
           className={styles.Card}
           status={status.title}
           tasks={tasksByStatus[status.id] || []}
-          updateTaskStatus={updateTaskStatus} // Pass the function to update status
+          updateTaskStatus={updateTaskStatus}
+          updateTaskChecklist={updateTaskChecklist}  
         />
       ))}
     </div>

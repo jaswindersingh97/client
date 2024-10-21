@@ -1,33 +1,35 @@
 import styles from './CheckList.module.css';
-import React from 'react'; // No need for useState as it's in TaskLayout
+import React, { useContext } from 'react'; 
 import { DownArrow, UpArrow } from '../../assets/DashboardPageComponents';
-import axios from 'axios';  // Import axios for API calls
+import apiRequest from './../../Apis/apiRequest'
+import { AppContext } from './../../Context/AppContext';
 
 function CheckList({ taskId, expandHandler, checklist, setChecklist, expanded }) {
-  
+  const { token } = useContext(AppContext);
+
   const updateTaskStatus = async (itemId, newStatus) => {
-    // try {
-    //   await axios.put(`/api/tasks/${taskId}/checklist/${itemId}`, { status: newStatus });
-    //   console.log("Task status updated successfully");
-    // } catch (error) {
-    //   console.error("Failed to update task status", error);
-    // }
+    await apiRequest({
+      endpoint: `/secure/tickChecklist`,
+      method: 'patch',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      data: {
+        checklistItemId: itemId,
+        status: newStatus,
+      },
+    });
   };
 
-  // Updates the status of a specific checklist item when checkbox is toggled
   const changeStatus = (index) => {
     const updatedChecklist = checklist.map((item, i) => 
-      i === index ? { ...item, status: !item.status } : item
+      i === index ? { ...item, completed: !item.completed } : item
     );
     setChecklist(updatedChecklist);
-
-    // Call the API to update the server
-    const updatedItem = updatedChecklist[index];
-    updateTaskStatus(updatedItem.id, updatedItem.status);
+    updateTaskStatus(updatedChecklist[index]._id, updatedChecklist[index].completed);
   };
 
-  // Count completed tasks
-  const completedCount = checklist.filter(item => item.status).length;
+  const completedCount = checklist.filter(item => item.completed).length;
 
   return (
     <div className={styles.container}>
@@ -39,17 +41,13 @@ function CheckList({ taskId, expandHandler, checklist, setChecklist, expanded })
           className={styles.expanded} 
         />
       </div>
-
       {expanded && (
         <div className={styles.body}>
           {checklist.map((item, index) => (
-            <div 
-            key={index} 
-            className={styles.item}
-            >
+            <div key={index} className={styles.item}>
               <input 
                 type="checkbox" 
-                checked={item.status ?? false} 
+                checked={item.completed ?? false}
                 onChange={() => changeStatus(index)} 
                 className={styles.checkbox}
               />
