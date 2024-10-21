@@ -3,7 +3,7 @@ import TaskLayout from './TaskLayout';
 import { useState } from 'react'
 import { CollapseAll } from '../../assets/DashboardPageComponents';
 import React from 'react';
-function CardLayout({status,tasks}) {
+function CardLayout({status,tasks,updateTaskStatus}) {
   const [collapseAll, setCollapseAll] = useState(true);
   const toggleCollapseAll = () => {
     setCollapseAll(!collapseAll);
@@ -22,7 +22,7 @@ function CardLayout({status,tasks}) {
         {tasks.map((task,index)=>{
             return(
                 <div key={index} className={styles.TaskContainer}>
-                    <TaskLayout task={task} collapseAll={collapseAll}/>
+                    <TaskLayout task={task} collapseAll={collapseAll} updateTaskStatus={updateTaskStatus}/>
                 </div>
             )
         })}

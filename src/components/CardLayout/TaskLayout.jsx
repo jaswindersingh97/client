@@ -7,7 +7,7 @@ import priorityArray from './../../ComponentUtils/Prioritylist';
 import generateInitials from './../../Utils/generateInitials';
 import { shortDate } from '../../Utils/formatDate';
 
-function TaskLayout({ task, collapseAll }) {
+function TaskLayout({ task, collapseAll,updateTaskStatus }) {
   const { _id, title, priority, assignedTo, status, checklist: initialChecklist,dueDate } = task;
   const date = shortDate(new Date(dueDate));
   const initials = generateInitials(assignedTo[0]);
@@ -24,6 +24,9 @@ function TaskLayout({ task, collapseAll }) {
 
   const expandHandler = () => {
     setExpanded(!expanded); // Local expand/collapse toggle
+  };
+  const handleStatusChange = (newStatus) => {
+    updateTaskStatus(_id, newStatus); // Call the function from CardGrid to update status
   };
 
   return (
@@ -62,7 +65,7 @@ function TaskLayout({ task, collapseAll }) {
     }`}>{date}</button>}
         <div>
           {possibleStatus.map((item, index) => (
-            <button key={index} className={styles.footerButtons}>
+            <button key={index} className={styles.footerButtons} onClick={() => handleStatusChange(item.id)}>
               {item.name}
             </button>
           ))}

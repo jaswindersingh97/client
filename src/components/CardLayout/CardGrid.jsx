@@ -1,9 +1,9 @@
-import styles from './CardGrid.module.css';
 import React, { useContext, useEffect, useState } from 'react';
 import CardLayout from './CardLayout';
 import { AppContext } from '../../Context/AppContext';
 import { apiRequest } from '../../Apis';
 import { statuses } from '../../ComponentUtils/Statuses';
+import styles from './CardGrid.module.css';
 
 function CardGrid() {
   const { selectedValue, token } = useContext(AppContext);
@@ -24,19 +24,40 @@ function CardGrid() {
     setTaskData(response.data.response || []); // Ensure taskData is an array
   };
 
+  const updateTaskStatus = async (taskId, newStatus) => {
+    // Make API call to update the task's status
+    await apiRequest({
+      endpoint: `/secure/updateTaskStatus/${taskId}`,
+      method: 'put',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: {
+        status: newStatus,
+      },
+    });
+    // Update local state after successful API call
+    setTaskData(prevTasks => 
+      prevTasks.map(task => 
+        task._id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
+  };
+
   const tasksByStatus = statuses.reduce((acc, status) => {
     acc[status.id] = taskData.filter(task => task.status === status.id);
     return acc;
   }, {});
-    return (
+
+  return (
     <div className={styles.container}>
-      
       {statuses.map((status, index) => (
         <CardLayout
           key={index}
           className={styles.Card}
-          status={status.title} // Pass the status title to the card
-          tasks={tasksByStatus[status.id] || []}  // Pass segregated tasks to CardLayout
+          status={status.title}
+          tasks={tasksByStatus[status.id] || []}
+          updateTaskStatus={updateTaskStatus} // Pass the function to update status
         />
       ))}
     </div>
