@@ -3,19 +3,18 @@ import { useState } from 'react';
 import Options from './Options';
 import CheckList from './CheckList';
 import otherStatus from '../../ComponentUtils/Statuses';
-function TaskLayout() {
-    const Task = {}
-    const background = '#FF2473';
-    const priority = 'HIGH PRIORITY';
-    const initials = 'AK';
-    const [expanded,setExpanded] = useState(true);
-    const title = "Title";
+import priorityArray from './../../ComponentUtils/Prioritylist';
+import generateInitials from './../../Utils/generateInitials';
+function TaskLayout({task}) {
+    const {_id,title,priority,assignedTo,status} = task;
+    const initials = generateInitials(assignedTo[0]);
+    const {priorityname,prioritycolor} = priorityArray[priority];
+    const [expanded,setExpanded] = useState(false);
     const DueDate = "feb 10th";
-    const currentStatusId =3; 
     const changeStatus = () =>{
-      alert("button clked")
+      alert(_id)
     }
-    const possibleStatus = otherStatus(currentStatusId);
+    const possibleStatus = otherStatus(status);
     const [checklist, setChecklist] = useState([
       { id: 1, status: true, task: "Task to be done" },
     ]);
@@ -27,12 +26,12 @@ function TaskLayout() {
       <div className={styles.header}>
         <div className={styles.upperheader}>
           <div className={styles.left_upperheader}>
-              <div style={{background:background}}></div>
-              <p>{priority}</p>
-            <span>{initials}</span>
+              <div style={{background:prioritycolor}}></div>
+              <p>{priorityname}</p>
+            {initials && <span>{initials}</span>}
           </div>
             <div className={styles.Options}>
-            <Options/>
+            <Options _id={_id}/>
             </div>
         </div>
         <div className={styles.lowerheader}>

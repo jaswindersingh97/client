@@ -4,6 +4,7 @@ import {AppContext} from './../../Context/AppContext';
 import React, { useContext, useEffect } from 'react'
 import { AddPeople } from '../../assets/DashboardPageComponents';
 import Options from './../../ComponentUtils/DateFilter';
+import CardGrid from '../../components/CardLayout/CardGrid';
 import CardLayout from '../../components/CardLayout/CardLayout';
 import CreateTask from '../../components/CreateTask/CreateTask';
 import { toast } from 'react-toastify';
@@ -13,7 +14,6 @@ function Dashboard() {
   const {selectedValue,filterHandle,token,user,getUser} = useContext(AppContext);
   useEffect(()=>{
     getUser();
-    toast.success("userLoaded successfully")
   },[token]);
   return (
     <div className={styles.container}>
@@ -36,8 +36,8 @@ function Dashboard() {
     <div className={styles.body}>
     {/* <CreateTask/> */}
     {/* <CardLayout/> */}
-    {/* <CardGrid/> */}
-    <SearchUser/>
+    <CardGrid/>
+    {/* <SearchUser/> */}
     </div>
   </div>
   )

@@ -1,4 +1,4 @@
-const handleclk = () => alert("button clicked");    // dummy function for the options button
+const handleclk = (id) => alert(id);    // dummy function for the options button
 const OptionsLst = [
     { name: 'Share', onClick: handleclk },
     { name: 'Edit', onClick: handleclk },

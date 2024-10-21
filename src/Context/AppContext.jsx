@@ -6,14 +6,14 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   
   //Filter
-    const [selectedValue,setSelectedValue] = useState(7);
+    const [selectedValue,setSelectedValue] = useState('week');
     const filterHandle = (e) => {
       setSelectedValue(e.target.value)
     }
     const token = localStorage.getItem('token');
     
   //User
-    const [user,setUser] = useState({})
+    const [user,setUser] = useState({name:""})
     const getUser = async()=>{
       const {data} = await apiRequest({
         endpoint:'/secure/getUser',

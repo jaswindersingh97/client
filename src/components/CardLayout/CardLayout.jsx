@@ -2,12 +2,7 @@ import styles from './CardLayout.module.css';
 import TaskLayout from './TaskLayout';
 import React from 'react'
 import { CollapseAll } from '../../assets/DashboardPageComponents';
-function CardLayout() {
-    const Task = [
-        {name:1},
-        {name:1},{name:1},{name:1},{name:1},{name:1},
-    ]
-    const status = "To Do"
+function CardLayout({status,tasks}) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -18,10 +13,10 @@ function CardLayout() {
         </div>
       </div>
       <div className={styles.body}>
-        {Task.map((item,index)=>{
+        {tasks.map((task,index)=>{
             return(
                 <div key={index} className={styles.TaskContainer}>
-                    <TaskLayout />
+                    <TaskLayout task={task}/>
                 </div>
             )
         })}

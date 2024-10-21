@@ -2,7 +2,7 @@ import styles from './Options.module.css';
 import { optionButton } from './../../assets/DashboardPageComponents';
 import { useState } from 'react';
 import OptionsLst from '../../ComponentUtils/OptionLst';
-function Options() {
+function Options({_id}) {
     const [visible, setVisible] = useState(false);
     const toggleVisible = (status) => {
       setVisible(status);
@@ -25,7 +25,7 @@ function Options() {
           {OptionsLst.map((item, index) => (
             <span
               className={styles.select}
-              onClick={item.onClick}
+              onClick={()=>item.onClick(_id)}
               key={index}
               style={{ color: item.color || 'black', cursor: 'pointer' }}
             >
