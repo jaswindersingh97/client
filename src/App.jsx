@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { SignIn,Register , ErrorPage, Dashboard, AnalyticsPage, SettingsPage} from './pages';
 import { MainPageLayout } from './components';
+import SharePage from './pages/SharePage/SharePage';
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
           <Route path="analytics" element={<AnalyticsPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
+        <Route path='/share/:TaskId' element={<SharePage/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/signIn' element={<SignIn/>}/>
         <Route path='*' element={<ErrorPage/>}/>

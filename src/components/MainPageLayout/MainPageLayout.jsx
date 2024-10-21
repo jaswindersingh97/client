@@ -1,9 +1,9 @@
 import styles from './MainPageLayout.module.css';
 import { useState } from 'react'
 import { useNavigate,Outlet } from 'react-router-dom';
-import {logo,Board,Analytics,Logout,Setting}  from '../../assets/MainLayoutComponent';
 import { Modal} from '../';
 import { ToastContainer } from 'react-toastify';
+import {headerelements,bodyelements,footerelements} from './../../ComponentUtils/LeftNavLst';
 function DummyComponent (){
   return(
     <div></div>
@@ -19,22 +19,13 @@ function BodyElement({icon,name,link,onClick}){
   )
 }
 
+export {BodyElement};
+
 function MainPageLayout() {
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
-  const headerelements =[
-    {icon:logo,name:"Pro Manage",link:"/dashboard"},
-  ];
-  const bodyelements = [
-    {icon:Board,name:"Board",link:"/dashboard"},
-    {icon:Analytics,name:"Analytics",link:"/analytics"},
-    {icon:Setting,name:"Settings",link:"/settings"},
-  ];
-  const footerelements = [
-    {icon:Logout,name:"Log out",onClick:()=>{openModal()}},
-  ];
 
   return (
     <div className={styles.container}>
