@@ -40,7 +40,7 @@ function TaskLayout({ task, collapseAll, updateTaskStatus, updateTaskChecklist }
           </div>
         </div>
         <div className={styles.lowerheader}>
-          <h2 title={title}>{title}</h2>
+          <h2 title={title}>{title.length < 45 ? title : title.slice(0, 44) + '...'}</h2>
         </div>
       </div>
       <div className={styles.body}>
