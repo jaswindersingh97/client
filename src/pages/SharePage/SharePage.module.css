@@ -1,4 +1,79 @@
 .container{
     display: flex;
     flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+.header{
+    display: flex;
+}
+.icon{
+    padding: 20px;
+    display: flex;
+    color: black;
+    gap: 20px;
+}
+.body{
+    flex: 1;
+    justify-items: center;
+}
+.Taskbody h2{
+    margin: 0px;
+}
+.TaskLayout{
+    width: 654px;
+    max-height: 782px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #EDF5FE;
+    padding: 18px;
+    gap: 10px;
+}
+.priority{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.priority span{
+    padding: 0.5px;
+    border-radius: 50%;
+}
+.checklist p{
+    font-weight: 500;
+}
+.checklistItems{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.item{
+    padding: 10px;
+    border: 1px,#E2E2E2,solid;
+    border-radius: 12px;
+    display: flex;
+    gap: 10px;
+}
+.item p{
+    margin: 0px;
+}
+.item input{
+    width: 18px;
+}
+.item:hover{
+    background-color: #E2E2E2;
+}
+.TaskFooter{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.TaskFooter div{
+    padding-inline: 10px;
+    padding-block: 5px;
+    border-radius: 8px;
+    color: white;
+    background: #CF3636;
+
 }

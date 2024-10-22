@@ -4,7 +4,7 @@ import { DownArrow, UpArrow } from '../../assets/DashboardPageComponents';
 import apiRequest from './../../Apis/apiRequest'
 import { AppContext } from './../../Context/AppContext';
 
-function CheckList({ taskId, expandHandler, checklist, setChecklist, expanded }) {
+function CheckList({  expandHandler, checklist, setChecklist, expanded }) {
   const { token } = useContext(AppContext);
 
   const updateTaskStatus = async (itemId, newStatus) => {

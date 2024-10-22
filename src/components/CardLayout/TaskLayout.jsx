@@ -45,7 +45,6 @@ function TaskLayout({ task, collapseAll, updateTaskStatus, updateTaskChecklist }
       </div>
       <div className={styles.body}>
         <CheckList 
-          taskId={_id}
           expandHandler={expandHandler}
           checklist={initialChecklist}
           setChecklist={(updatedChecklist) => updateTaskChecklist(_id, updatedChecklist)}
