@@ -23,6 +23,21 @@ const AppProvider = ({ children }) => {
       });
       setUser(data.user);
     };
+  
+  //overlay components handling
+    function DummyComponent (){
+      return(
+        <div></div>
+      )
+    }  
+
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [component,setComponent]=useState(null);
+    const openModal = (Component) => {
+      setComponent(()=>Component);
+      setModalOpen(true);
+    }
+    const closeModal = () => setModalOpen(false);
     
     return (
       <AppContext.Provider 
@@ -33,7 +48,13 @@ const AppProvider = ({ children }) => {
         token,
         user,
         setUser,
-        getUser
+        getUser,
+        isModalOpen, 
+        setModalOpen,
+        closeModal,
+        openModal,
+        component,
+        setComponent
         }}>
         {children}
       </AppContext.Provider>

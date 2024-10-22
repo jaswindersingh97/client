@@ -9,9 +9,10 @@ import CardLayout from '../../components/CardLayout/CardLayout';
 import CreateTask from '../../components/CreateTask/CreateTask';
 import { toast } from 'react-toastify';
 import SearchUser from '../../components/MiniComponents/SearchUser/SearchUser';
+import AddPeopleToBoard from '../../components/AddPeopleToBoard/AddPeopleToBoard';
 // import CardGrid from '../../components/CardLayout/CardGrid';
 function Dashboard() {
-  const {selectedValue,filterHandle,token,user,getUser} = useContext(AppContext);
+  const {selectedValue,filterHandle,token,user,getUser,openModal} = useContext(AppContext);
   useEffect(()=>{
     getUser();
   },[token]);
@@ -23,7 +24,7 @@ function Dashboard() {
     </div>
     <div className={styles.subHeading}>
       <h2>Board</h2>
-      <div className={styles.AddPeople}>
+      <div onClick={()=>openModal(AddPeopleToBoard)} className={styles.AddPeople}>
         <img src={AddPeople} alt='Add People'/>
         <p>Add People</p>
       </div>

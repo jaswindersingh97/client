@@ -1,10 +1,11 @@
 import styles from './MainPageLayout.module.css';
-import { useState } from 'react'
+import { Component, useContext, useState } from 'react'
 import { useNavigate,Outlet } from 'react-router-dom';
 import { Modal} from '../';
 import { ToastContainer } from 'react-toastify';
 import {headerelements,bodyelements,footerelements} from './../../ComponentUtils/LeftNavLst';
 import AddPeopleToBoard from '../AddPeopleToBoard/AddPeopleToBoard';
+import { AppContext } from '../../Context/AppContext';
 function DummyComponent (){
   return(
     <div></div>
@@ -23,10 +24,7 @@ function BodyElement({icon,name,link,onClick}){
 export {BodyElement};
 
 function MainPageLayout() {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
+  const {isModalOpen, closeModal,component}= useContext(AppContext);
 
   return (
     <div className={styles.container}>
@@ -47,11 +45,10 @@ function MainPageLayout() {
           })}        
           </div>
       </div>
-      <button onClick={openModal}>Testing</button>
       <div className={styles.right}>
         <Outlet/>
       </div>
-      <Modal isOpen={isModalOpen} Component={AddPeopleToBoard} onClose={closeModal}/>
+      <Modal isOpen={isModalOpen} Component={component} onClose={closeModal}/>
       <ToastContainer/>
     </div>
   )
