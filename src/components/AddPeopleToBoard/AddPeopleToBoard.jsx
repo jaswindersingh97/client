@@ -21,4 +21,4 @@ function AddPeopleToBoard() {
   )
 }
 
-export default AddPeopleToBoard
+export default AddPeopleToBoard;
