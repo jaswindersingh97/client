@@ -12,6 +12,7 @@ function PrioritySelect({priority, setPriority}) {
         <div className={styles.field}>
           {priorityArray.map((item, index) => (
             <div
+            style={{ background: item.prioritycolor }}
               key={index}
               onClick={() => setPriority(item.id)}
               className={`${styles.priorityItem} ${
