@@ -28,7 +28,7 @@ function SharePage() {
   }, [TaskId]);
 
   const { title, priority, dueDate, checklist = [] } = task || {};
-  const { priorityname, prioritycolor } = priorityArray[priority] || {};
+  const { priorityname, prioritycolor } = priorityArray[priority-1] || {};
   const formattedDate = dueDate ? shortDate(new Date(dueDate)) : 'No due date';
   const completedCount = checklist.filter(item => item.completed).length;
 

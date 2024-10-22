@@ -11,7 +11,7 @@ function TaskLayout({ task, collapseAll, updateTaskStatus, updateTaskChecklist }
   const { _id, title, priority, assignedTo, status, checklist: initialChecklist, dueDate } = task;
   const date = shortDate(new Date(dueDate));
   const initials = assignedTo.length > 0 && assignedTo[0]?.name ? generateInitials(assignedTo[0].name) : "";
-  const { priorityname, prioritycolor } = priorityArray[priority];
+  const { priorityname, prioritycolor } = priorityArray[priority-1];
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
