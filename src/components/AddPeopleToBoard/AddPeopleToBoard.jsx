@@ -1,6 +1,6 @@
 import styles from './AddPeopleToBoard.module.css';
 import React from 'react'
-
+import SearchUser from './../MiniComponents/SearchUser/SearchUser';
 function AddPeopleToBoard() {
   return (
     <div className={styles.container}>
@@ -8,11 +8,11 @@ function AddPeopleToBoard() {
         <h6>Add people to the board</h6>
       </div>
       <div className={styles.body}>
-        <input type='text' placeholder='Enter the email'/>
-          
+        <SearchUser/>
       </div>  
       <div className={styles.footer}>
-        <button type='button' ></button>
+        <button type='button'>Cancel</button>
+        <button type='submit'>Add Email</button>
       </div>
     </div>
   )

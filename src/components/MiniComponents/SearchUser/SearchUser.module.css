@@ -5,9 +5,6 @@
     height: 300px;
 }
 .header{
-    display: flex;
-}
-.header{
     border: 1px solid #E2E2E2;
     display: flex;
     padding: 10px;
@@ -45,4 +42,19 @@
     outline: none;
     padding-inline: 30px;
     padding-block: 5px;
+}
+.selectedUser{
+    display: flex;
+    padding-inline: 2px;
+    background-color: rgb(190, 210, 211);
+    gap:10px;
+    border: 1px,black,solid;
+}
+.selectedUser p{
+    margin: 0px;
+    cursor:default;
+}
+.selectedUser span{
+    color: red;
+    cursor: pointer;
 }

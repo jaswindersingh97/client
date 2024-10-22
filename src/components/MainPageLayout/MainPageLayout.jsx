@@ -4,6 +4,7 @@ import { useNavigate,Outlet } from 'react-router-dom';
 import { Modal} from '../';
 import { ToastContainer } from 'react-toastify';
 import {headerelements,bodyelements,footerelements} from './../../ComponentUtils/LeftNavLst';
+import AddPeopleToBoard from '../AddPeopleToBoard/AddPeopleToBoard';
 function DummyComponent (){
   return(
     <div></div>
@@ -43,12 +44,14 @@ function MainPageLayout() {
         <div className={styles.footer}>
         {footerelements.map((item,index)=>{
             return (<BodyElement icon={item.icon} name={item.name} link={item.link} onClick={item.onClick} key={index}/>) 
-          })}        </div>
+          })}        
+          </div>
       </div>
+      <button onClick={openModal}>Testing</button>
       <div className={styles.right}>
         <Outlet/>
       </div>
-      <Modal isOpen={isModalOpen} Component={DummyComponent} onClose={closeModal}/>
+      <Modal isOpen={isModalOpen} Component={AddPeopleToBoard} onClose={closeModal}/>
       <ToastContainer/>
     </div>
   )

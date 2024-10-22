@@ -4,17 +4,24 @@ import downArrow from './../../../assets/DashboardPageComponents/DownArrow.svg';
 import apiRequest from './../../../Apis/apiRequest';
 import { AppContext } from '../../../Context/AppContext';
 import generateInitials from '../../../Utils/generateInitials';
+
 function SearchUser() {
     const [search, setSearch] = useState("");
     const [userList, setUserList] = useState([]);
-    const {token} = useContext(AppContext);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const { token } = useContext(AppContext);
+
     useEffect(() => {
         const fetchUsers = async () => {
             if (search) {
                 try {
-                    const response = await apiRequest({endpoint:`/secure/searchUser?email=${search}`,method:'get',headers:{
-                        Authorization:`Bearer ${token}`
-                    }})
+                    const response = await apiRequest({
+                        endpoint: `/secure/searchUser?email=${search}`,
+                        method: 'get',
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
                     setUserList(response.data);
                 } catch (error) {
                     console.error("Error fetching users:", error);
@@ -32,33 +39,49 @@ function SearchUser() {
         return () => clearTimeout(delayDebounceFn);
     }, [search]);
 
-    const handleAssign = (userId) => {
-        // Handle assigning the user
-        console.log("Assigning user:", userId);
+    const handleAssign = (user) => {
+        setSelectedUser(user);
+        setSearch("");  // Clear search input after selecting a user
+        setUserList([]); // Clear user list after selection
+    };
+
+    const handleRemoveUser = () => {
+        setSelectedUser(null);
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <input
-                    type='text'
-                    placeholder='Add an assignee'
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-                <img src={downArrow} alt='downArrow' />
+                {selectedUser ? (
+                    <div className={styles.selectedUser}>
+                        <p>{selectedUser.email}</p>
+                        <span onClick={handleRemoveUser}>x</span>
+                    </div>
+                ) : (
+                    <>
+                        <input
+                            type='text'
+                            placeholder='Add an assignee'
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                        <img src={downArrow} alt='downArrow' />
+                    </>
+                )}
             </div>
-            <div className={styles.body}>
-                {userList.length > 0 && (
-                    userList.map((user) => (
+
+            {/* Only show the body when there is no selected user */}
+            {!selectedUser && userList.length > 0 && (
+                <div className={styles.body}>
+                    {userList.map((user) => (
                         <div key={user._id} className={styles.user}>
                             <span>{generateInitials(user.name)}</span> 
                             <p>{user.email}</p>
-                            <button onClick={() => handleAssign(user._id)}>Assign</button>
+                            <button onClick={() => handleAssign(user)}>Assign</button>
                         </div>
-                    ))
-                )}
-            </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
