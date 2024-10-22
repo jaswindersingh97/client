@@ -1,9 +1,11 @@
 import styles from './AddPeopleToBoard.module.css';
-import React from 'react'
+import React, { useContext } from 'react'
 import SearchUser from './../MiniComponents/SearchUser/SearchUser';
 import { useState } from 'react';
+import { AppContext } from '../../Context/AppContext';
 function AddPeopleToBoard() {
   const [selectedUser, setSelectedUser] = useState(null);
+  const {closeModal} = useContext(AppContext);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -14,7 +16,7 @@ function AddPeopleToBoard() {
         <p>{selectedUser?selectedUser.name:""}</p>
       </div>  
       <div className={styles.footer}>
-        <button type='button'>Cancel</button>
+        <button type='button' onClick={closeModal}>Cancel</button>
         <button type='submit'>Add Email</button>
       </div>
     </div>
