@@ -5,10 +5,10 @@ import apiRequest from './../../../Apis/apiRequest';
 import { AppContext } from '../../../Context/AppContext';
 import generateInitials from '../../../Utils/generateInitials';
 
-function SearchUser() {
+function SearchUser({selectedUser, setSelectedUser}) {
     const [search, setSearch] = useState("");
     const [userList, setUserList] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
+    // const [selectedUser, setSelectedUser] = useState(null);
     const { token } = useContext(AppContext);
 
     useEffect(() => {
