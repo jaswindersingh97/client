@@ -24,7 +24,7 @@ function BodyElement({icon,name,link,onClick}){
 export {BodyElement};
 
 function MainPageLayout() {
-  const {isModalOpen, closeModal,component}= useContext(AppContext);
+  const {isModalOpen, closeModal,component,openModal}= useContext(AppContext);
 
   return (
     <div className={styles.container}>
@@ -53,5 +53,4 @@ function MainPageLayout() {
     </div>
   )
 }
-
 export default MainPageLayout

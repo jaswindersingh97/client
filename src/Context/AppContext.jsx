@@ -60,6 +60,8 @@ const AppProvider = ({ children }) => {
     //global task data
     const [taskData, setTaskData] = useState([]);
 
+    //delete 
+    const [deleteId,setDeleteId]= useState(null);
     return (
       <AppContext.Provider 
       value={{ 
@@ -80,7 +82,9 @@ const AppProvider = ({ children }) => {
         item,
         setItem,
         taskData, 
-        setTaskData
+        setTaskData,
+        deleteId,
+        setDeleteId
         }}>
         {children}
       </AppContext.Provider>

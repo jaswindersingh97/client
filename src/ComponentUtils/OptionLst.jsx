@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AppContext } from "../Context/AppContext";
 import CreateAndEditTask from "../components/CreateAndEditTask/CreateAndEditTask";
-
+import DeleteComponent from './../components/DeleteComponent/DeleteComponent';
 // Define the component where you use the context
 const OptionsListProvider = (task) => {
-  const { openModal,setItem } = useContext(AppContext); // Hooks inside a component
+  const { openModal,setItem,setDeleteId } = useContext(AppContext); // Hooks inside a component
   
   const Editclk = (_id, task) => {
     setItem(task);
@@ -26,11 +26,16 @@ const OptionsListProvider = (task) => {
       });
   };
 
-  // Create the options list inside the component where `useContext` is valid
+  const deleteClk = (id) =>{
+
+    setDeleteId(id);
+    openModal(DeleteComponent);
+  }
+
   const OptionsLst = [
     { name: 'Share', onClick: shareClk },
     { name: 'Edit', onClick: () => Editclk(task._id, task) }, // Pass the edit function
-    { name: 'Delete', color: '#CF3636', onClick: handleclk }
+    { name: 'Delete', color: '#CF3636', onClick: deleteClk }
   ];
 
   return OptionsLst; // Return the options list with correct handlers
