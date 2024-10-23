@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import CardLayout from './CardLayout';
 import { AppContext } from '../../Context/AppContext';
 import { apiRequest } from '../../Apis';
@@ -6,8 +6,7 @@ import { statuses } from '../../ComponentUtils/Statuses';
 import styles from './CardGrid.module.css';
 
 function CardGrid() {
-  const { selectedValue, token } = useContext(AppContext);
-  const [taskData, setTaskData] = useState([]);
+  const { selectedValue, token, taskData, setTaskData } = useContext(AppContext);
 
   useEffect(() => {
     getTasks();
@@ -25,7 +24,6 @@ function CardGrid() {
   };
 
   const updateTaskStatus = async (taskId, newStatus) => {
-    // Make API call to update the task's status
     await apiRequest({
       endpoint: `/secure/updateStatus`,
       method: 'patch',
@@ -37,7 +35,6 @@ function CardGrid() {
         Status: newStatus,
       },
     });
-    // Update local state after successful API call
     setTaskData(prevTasks => 
       prevTasks.map(task => 
         task._id === taskId ? { ...task, status: newStatus } : task
@@ -45,7 +42,6 @@ function CardGrid() {
     );
   };
 
-  // Update checklist in taskData
   const updateTaskChecklist = (taskId, updatedChecklist) => {
     setTaskData(prevTasks =>
       prevTasks.map(task =>
@@ -54,10 +50,13 @@ function CardGrid() {
     );
   };
 
-  const tasksByStatus = statuses.reduce((acc, status) => {
-    acc[status.id] = taskData.filter(task => task.status === status.id);
-    return acc;
-  }, {});
+  // Memoize tasksByStatus to recalculate only when taskData changes
+  const tasksByStatus = useMemo(() => {
+    return statuses.reduce((acc, status) => {
+      acc[status.id] = taskData.filter(task => task.status === status.id);
+      return acc;
+    }, {});
+  }, [taskData]);
 
   return (
     <div className={styles.container}>

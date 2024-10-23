@@ -1,25 +1,26 @@
 import styles from './CreateAndEditTask.module.css';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { AppContext } from '../../Context/AppContext';
 import { Title, DueDate, CheckListAdd, PrioritySelect, SearchUser } from './subComponents/index';
 import { apiRequest } from '../../Apis';
 
 function CreateAndEditTask() {
-  const { closeModal, token, item, setItem } = useContext(AppContext);
-  console.log(item)
+  const { closeModal, token, item, setItem, setTaskData ,taskData} = useContext(AppContext);
+  
   // Check if it's an edit mode by checking if item exists with an _id
   const isEdit = !!item?._id;
 
   // Initialize state with values from `item`, or default values for a new task
-  const [title, setTitle] = useState(item?.title || ''); // Default to empty if no item
+  const [title, setTitle] = useState(item?.title || '');
   const [priority, setPriority] = useState(item?.priority || 0);
-  const [checklist, setChecklist] = useState(Array.isArray(item?.checklist) ? item.checklist : []); // Ensure checklist is an array
+  const [checklist, setChecklist] = useState(Array.isArray(item?.checklist) ? item.checklist : []);
   const [selectedDate, setSelectedDate] = useState(item?.dueDate || '');
   const [selectedUser, setSelectedUser] = useState(item?.assignedTo?.[0] || "");
+
   // Function to handle form submission (either create or edit)
   const onSubmit = async () => {
-    const endpoint = isEdit ? `/secure/editTask/${item._id}` : "/secure/createTask"; // Append task id for edit
-    const method = isEdit ? "put" : "post"; // Use PUT for edit, POST for create
+    const endpoint = isEdit ? `/secure/editTask/${item._id}` : "/secure/createTask";
+    const method = isEdit ? "put" : "post";
 
     const data = {
       title,
@@ -30,8 +31,6 @@ function CreateAndEditTask() {
     if (selectedUser?._id) {
       data.assignedTo = [selectedUser._id]; // Safely access _id
     }
-  
-  
 
     // Send API request with appropriate method
     const response = await apiRequest({
@@ -42,10 +41,25 @@ function CreateAndEditTask() {
       },
       data,
     });
+    
+    const TaskData = response.data.response;
+    
+    // Update tasks in context
+    if (isEdit) {
+      // Update the existing task
+      setTaskData(prevTasks =>
+        prevTasks.map(task => (task._id === TaskData._id ? TaskData : task))
+      );
+
+    } else {
+      // Add the new task
+      setTaskData(prevTasks => [...prevTasks, TaskData]);
+    }
+
 
     // Clear the item in context after creation/editing
-    setItem(null); // Clear item if a new task was created or editing is done
-    closeModal(); // Close the modal
+    setItem(null);
+    closeModal();
   };
 
   return (
@@ -54,16 +68,17 @@ function CreateAndEditTask() {
         <Title title={title} setTitle={setTitle} />
         <PrioritySelect priority={priority} setPriority={setPriority} />
         <SearchUser selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
-        <CheckListAdd checklist={checklist} setChecklist={setChecklist} /> {/* Checklist component */}
+        <CheckListAdd checklist={checklist} setChecklist={setChecklist} />
       </div>
       <div className={styles.footer}>
         <DueDate selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         <button onClick={closeModal} type='button'>Cancel</button>
         <button type='submit' onClick={onSubmit}>
-          {isEdit ? 'Update Task' : 'Create Task'} {/* Button text based on mode */}
+          {isEdit ? 'Update Task' : 'Create Task'}
         </button>
       </div>
     </div>
+    
   );
 }
 

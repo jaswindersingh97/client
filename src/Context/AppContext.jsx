@@ -56,6 +56,10 @@ const AppProvider = ({ children }) => {
 
     //EditTask
     const [item,setItem] = useState(null);
+
+    //global task data
+    const [taskData, setTaskData] = useState([]);
+
     return (
       <AppContext.Provider 
       value={{ 
@@ -74,7 +78,9 @@ const AppProvider = ({ children }) => {
         setComponent,
         setToken,
         item,
-        setItem
+        setItem,
+        taskData, 
+        setTaskData
         }}>
         {children}
       </AppContext.Provider>
