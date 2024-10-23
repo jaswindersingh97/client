@@ -1,0 +1,39 @@
+.priority{display: flex;
+    padding-block: 10px;
+gap: 10px;}
+.Heading{
+    color: black;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    }
+    .Heading p{margin: 0px;}
+    .Heading span{
+        color: #FF0000;
+    }
+.field{
+    display: flex;
+    gap: 10px;
+    margin-left:auto ;
+
+}
+.priorityItem{
+    padding: 5px;
+    display: flex;
+    border: 1px solid #E2E2E2;
+    border-radius: 8px;
+    margin: 0px;
+    align-items: center;
+    gap: 10px;
+}
+.priorityItem span{
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+.priorityItem p{
+    margin: 0px;
+}
+.Active{
+    background-color: #dedeea;
+}

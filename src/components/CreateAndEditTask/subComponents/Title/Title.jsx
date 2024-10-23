@@ -4,7 +4,7 @@ function Title({title, setTitle}) {
   return (
     <div className={styles.Title}>
         <div className={styles.Heading}>
-          <h3>Title</h3>
+          <p>Title</p>
           <span>*</span>
         </div>
         <div className={styles.field}>

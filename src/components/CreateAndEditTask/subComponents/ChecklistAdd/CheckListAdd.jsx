@@ -1,4 +1,5 @@
 import React from 'react'
+import DeleteIcon from './../../../../assets/CreateTaskLayout/Delete.svg'
 import styles from './CheckListAdd.module.css';
 function CheckListAdd({checklist, setChecklist}) {
       // Calculate completed checklist items
@@ -34,7 +35,7 @@ function CheckListAdd({checklist, setChecklist}) {
   return (
     <div className={styles.checklist}>
     <div className={styles.Heading}>
-      <h3>Checklist ({completedCount}/{checklist.length})</h3>
+      <p>Checklist ({completedCount}/{checklist.length})</p>
       <span>*</span>
     </div>
     <div className={styles.field}>
@@ -51,11 +52,11 @@ function CheckListAdd({checklist, setChecklist}) {
             onChange={(e) => updateChecklistText(index, e.target.value)}
             placeholder='Enter item'
           />
-          <button onClick={() => deleteChecklistItem(index)}>Delete</button>
+          <button onClick={() => deleteChecklistItem(index)}><img src={DeleteIcon} alt='deleteicon'/></button>
         </div>
       ))}
-      <button onClick={addNewChecklistItem}>+ Add New</button>
     </div>
+      <button onClick={addNewChecklistItem}>+ Add New</button>
   </div>
 
   )

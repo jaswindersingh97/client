@@ -53,7 +53,7 @@ function CreateAndEditTask() {
 
     } else {
       // Add the new task
-      setTaskData(prevTasks => [...prevTasks, TaskData]);
+      setTaskData(prevTasks => [ TaskData,...prevTasks]);
     }
 
 
@@ -67,12 +67,15 @@ function CreateAndEditTask() {
       <div className={styles.body}>
         <Title title={title} setTitle={setTitle} />
         <PrioritySelect priority={priority} setPriority={setPriority} />
-        <SearchUser selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+        <div className={styles.SearchUser}><span>Assign to</span><SearchUser selectedUser={selectedUser} setSelectedUser={setSelectedUser} /></div>
         <CheckListAdd checklist={checklist} setChecklist={setChecklist} />
       </div>
       <div className={styles.footer}>
         <DueDate selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-        <button onClick={closeModal} type='button'>Cancel</button>
+        <button onClick={
+          ()=>{
+          setItem(null);
+          closeModal()}} type='button'>Cancel</button>
         <button type='submit' onClick={onSubmit}>
           {isEdit ? 'Update Task' : 'Create Task'}
         </button>
