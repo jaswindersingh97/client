@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { AuthPageLayout } from '../../components';
 import { fieldConfig } from '../../Forms/SignIn';
 import { useNavigate } from 'react-router-dom';
 import { apiRequest } from '../../Apis';
 import { toast } from 'react-toastify';
+import { AppContext } from '../../Context/AppContext';
 function SignIn() {
+  const {setToken} = useContext(AppContext);
   const navigate = useNavigate();
   const onSubmit = async (formData) => {
     const endpoint = '/auth/login';
@@ -15,9 +17,12 @@ function SignIn() {
     const { message, error } = response.data;
 
     if (message) {
-        localStorage.setItem("token", response.data.token);
-        toast.success(message);
-        navigate("/dashboard");
+      setToken(response.data.token);
+      console.log(message)
+      toast.success(message);
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 3000); 
     } 
     else if (error) {
         toast.error(error);

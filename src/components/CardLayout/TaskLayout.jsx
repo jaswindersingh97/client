@@ -36,7 +36,7 @@ function TaskLayout({ task, collapseAll, updateTaskStatus, updateTaskChecklist }
             {initials && <span>{initials}</span>}
           </div>
           <div className={styles.Options}>
-            <Options _id={_id} />
+            <Options _id={_id} task={task} />
           </div>
         </div>
         <div className={styles.lowerheader}>

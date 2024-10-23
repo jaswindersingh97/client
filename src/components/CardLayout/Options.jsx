@@ -1,8 +1,9 @@
 import styles from './Options.module.css';
 import { optionButton } from './../../assets/DashboardPageComponents';
 import { useState } from 'react';
-import OptionsLst from '../../ComponentUtils/OptionLst';
-function Options({_id}) {
+import OptionsListProvider from '../../ComponentUtils/OptionLst';
+function Options({_id,task}) {
+    const OptionsLst = OptionsListProvider(task);
     const [visible, setVisible] = useState(false);
     const toggleVisible = (status) => {
       setVisible(status);
@@ -25,7 +26,7 @@ function Options({_id}) {
           {OptionsLst.map((item, index) => (
             <span
               className={styles.select}
-              onClick={()=>item.onClick(_id)}
+              onClick={()=>item.onClick(_id,task)}
               key={index}
               style={{ color: item.color || 'black', cursor: 'pointer' }}
             >

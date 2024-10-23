@@ -47,7 +47,7 @@ function CheckListAdd({checklist, setChecklist}) {
           />
           <input
             type='text'
-            value={item.text}
+            value={item.task}
             onChange={(e) => updateChecklistText(index, e.target.value)}
             placeholder='Enter item'
           />
