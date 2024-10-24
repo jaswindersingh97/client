@@ -28,12 +28,12 @@
     cursor: pointer;
 }
 .body>div:hover{
-    background-color: aqua;
+    background-color: #c0c0c04d;
 }
 .footer{  
     margin-top: auto;
     color: #CF3636;
 }
 .footer:hover{
-    background-color: #b87878;
+    background-color: #B0B0B0;
 }

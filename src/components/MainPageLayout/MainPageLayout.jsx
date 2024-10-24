@@ -1,20 +1,13 @@
 import styles from './MainPageLayout.module.css';
-import { Component, useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate,Outlet } from 'react-router-dom';
 import { Modal} from '../';
 import { ToastContainer } from 'react-toastify';
 import {headerelements,bodyelements,footerelements} from './../../ComponentUtils/LeftNavLst';
-import AddPeopleToBoard from '../AddPeopleToBoard/AddPeopleToBoard';
 import { AppContext } from '../../Context/AppContext';
 import Logout from '../Logout/Logout';
-function DummyComponent (){
-  
-  return(
-    <div></div>
-  )
-}
+
 function BodyElement({icon,name,link,onClick}){
-  
   const navigate = useNavigate();
   return(
     <div onClick={onClick ? onClick : ()=>navigate(link)} className={styles.element}>
