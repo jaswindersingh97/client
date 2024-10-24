@@ -3,16 +3,14 @@ import { toast } from "react-toastify";
 import { AppContext } from "../Context/AppContext";
 import CreateAndEditTask from "../components/CreateAndEditTask/CreateAndEditTask";
 import DeleteComponent from './../components/DeleteComponent/DeleteComponent';
-// Define the component where you use the context
+import Logout from './../components/Logout/Logout'
 const OptionsListProvider = (task) => {
-  const { openModal,setItem,setDeleteId } = useContext(AppContext); // Hooks inside a component
+  const { openModal,setItem,setDeleteId } = useContext(AppContext); 
   
   const Editclk = (_id, task) => {
     setItem(task);
     openModal(CreateAndEditTask);
   };
-
-  const handleclk = (id) => alert(id); // Dummy function for the delete button
 
   const shareClk = (id) => {
     const fullDomain = window.location.hostname + (window.location.port ? `:${window.location.port}` : '');
@@ -30,6 +28,7 @@ const OptionsListProvider = (task) => {
 
     setDeleteId(id);
     openModal(DeleteComponent);
+    // openModal(Logout)
   }
 
   const OptionsLst = [

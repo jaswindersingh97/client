@@ -6,12 +6,15 @@ import { ToastContainer } from 'react-toastify';
 import {headerelements,bodyelements,footerelements} from './../../ComponentUtils/LeftNavLst';
 import AddPeopleToBoard from '../AddPeopleToBoard/AddPeopleToBoard';
 import { AppContext } from '../../Context/AppContext';
+import Logout from '../Logout/Logout';
 function DummyComponent (){
+  
   return(
     <div></div>
   )
 }
 function BodyElement({icon,name,link,onClick}){
+  
   const navigate = useNavigate();
   return(
     <div onClick={onClick ? onClick : ()=>navigate(link)} className={styles.element}>
@@ -25,7 +28,9 @@ export {BodyElement};
 
 function MainPageLayout() {
   const {isModalOpen, closeModal,component,openModal}= useContext(AppContext);
-
+  const onLogout = () =>{
+    openModal(Logout)
+  }
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -41,7 +46,7 @@ function MainPageLayout() {
         </div>
         <div className={styles.footer}>
         {footerelements.map((item,index)=>{
-            return (<BodyElement icon={item.icon} name={item.name} link={item.link} onClick={item.onClick} key={index}/>) 
+            return (<BodyElement icon={item.icon} name={item.name} link={item.link} onClick={onLogout} key={index}/>) 
           })}        
           </div>
       </div>

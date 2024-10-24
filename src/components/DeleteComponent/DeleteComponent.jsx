@@ -16,12 +16,12 @@ function DeleteComponent() {
     }});
     console.log(response);
     
-    setDeleteId(null); // Clear deleteId after deletion
+    setDeleteId(null); 
     closeModal();
   };
 
   const handleCancel = () => {
-    setDeleteId(null); // Clear deleteId on cancel
+    setDeleteId(null); 
     closeModal();
   };
 

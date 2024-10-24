@@ -3,12 +3,13 @@
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+    box-sizing: border-box;
 }
 .header{
     display: flex;
 }
 .icon{
-    padding: 20px;
+    padding-inline: 20px;
     display: flex;
     color: black;
     gap: 20px;
@@ -16,19 +17,21 @@
 .body{
     flex: 1;
     justify-items: center;
+    box-sizing: border-box;
+    height: 100%;
 }
 .Taskbody h2{
     margin: 0px;
 }
 .TaskLayout{
     width: 654px;
-    max-height: 782px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     border: 2px solid #EDF5FE;
     padding: 18px;
     gap: 10px;
+    /* height: 85%; */
 }
 .priority{
     display: flex;
@@ -47,6 +50,8 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    height: 350px;
+    overflow-y: auto;
 }
 .item{
     padding: 10px;
@@ -68,6 +73,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    margin-top: auto;
 }
 .TaskFooter div{
     padding-inline: 10px;
@@ -75,5 +81,13 @@
     border-radius: 8px;
     color: white;
     background: #CF3636;
+}
 
+@media (max-width: 768px){
+    .TaskLayout{
+        width: 80%;
+    }
+    .checklistItems{
+        height: 300px;
+    }
 }

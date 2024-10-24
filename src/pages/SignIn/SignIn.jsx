@@ -21,7 +21,8 @@ function SignIn() {
       console.log(message)
       toast.success(message);
       setTimeout(() => {
-        navigate('/dashboard');
+        window.location.href = '/dashboard';
+        // navigate('/dashboard');
       }, 3000); 
     } 
     else if (error) {
