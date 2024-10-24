@@ -33,10 +33,7 @@ function Dashboard() {
       </select>
     </div>
     <div className={styles.body}>
-    {/* <CreateTask/> */}
-    {/* <CardLayout/> */}
     <CardGrid/>
-    {/* <SearchUser/> */}
     </div>
   </div>
   )

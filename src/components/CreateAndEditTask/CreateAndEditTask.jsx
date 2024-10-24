@@ -72,13 +72,15 @@ function CreateAndEditTask() {
       </div>
       <div className={styles.footer}>
         <DueDate selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-        <button onClick={
-          ()=>{
-          setItem(null);
-          closeModal()}} type='button'>Cancel</button>
-        <button type='submit' onClick={onSubmit}>
-          {isEdit ? 'Update Task' : 'Create Task'}
-        </button>
+        <div className={styles.controlbuttons}>
+          <button className={styles.cancelbutton} onClick={
+            ()=>{
+            setItem(null);
+            closeModal()}} type='button'>Cancel</button>
+          <button className={styles.submitbutton} type='submit' onClick={onSubmit}>
+            Save
+          </button>
+        </div>
       </div>
     </div>
     

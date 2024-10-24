@@ -13,3 +13,22 @@
     color: black;
     font-weight: 500;
 }
+.footer{
+    display: flex;
+}
+.controlbuttons{
+    display: flex;
+    margin-left: auto;
+    gap: 10px;
+}
+.cancelbutton{
+    border: 1px,solid,#CF3636;
+    color: #CF3636;
+    padding-inline: 40px;
+}
+.submitbutton{
+    background-color: #17A2B8;
+    color: white;
+    padding-inline: 40px;
+
+}
