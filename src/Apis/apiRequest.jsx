@@ -12,17 +12,26 @@ const apiRequest = async ({ endpoint, method = 'GET', data = {}, headers = {} })
             data,
         };
         const response = await axios(config);
-        // toast.success(response.data.message);
-        return response; // returning the response data
+        return response; 
     } catch (error) {
-        if (error.response) {  
-            // toast.error(error.response.data.message || "An error occurred!");
+        if (error.response) {
+            if (error.response.status === 401) {
+                // Token is invalid or expired, handle 401 here
+                localStorage.removeItem('token'); // Remove invalid token
+                toast.error("Session expired. Please log in again.");
+                window.location.href = '/signIn';  // Redirect to login page
+            } else {
+                // Handle other errors (e.g., 400, 404, etc.)
+                toast.error(error.response.data.message || "An error occurred!");
+            }
             return error.response;
         } else if (error.request) {
-            // toast.error("Server not responding. Please try again later.");
+            // Handle no response from server
+            toast.error("Server not responding. Please try again later.");
             return { status: 500, data: { error: "Server not responding. Please try again later." } };
         } else {
-            // toast.error(error.message || "An unexpected error occurred.");
+            // Handle unexpected errors
+            toast.error(error.message || "An unexpected error occurred.");
             return { status: 500, data: { error: error.message } };
         }
     }
