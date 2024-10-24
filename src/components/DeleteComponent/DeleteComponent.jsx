@@ -28,11 +28,11 @@ function DeleteComponent() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h4>Are you sure you want to delete {deleteId}?</h4>
+        <h3>Are you sure you want to Delete?</h3>
       </div>
       <div className={styles.body}>
-        <button type='button' onClick={handleDelete}>Yes, Delete</button>
-        <button type='button' onClick={handleCancel}>Cancel</button>
+        <button className={styles.submit} type='button' onClick={handleDelete}>Yes, Delete</button>
+        <button className={styles.cancel} type='button' onClick={handleCancel}>Cancel</button>
       </div>
     </div>
   );

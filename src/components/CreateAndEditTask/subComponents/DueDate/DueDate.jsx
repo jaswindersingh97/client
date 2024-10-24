@@ -4,6 +4,15 @@ import styles from './DueDate.module.css';
 function DueDate({ selectedDate, setSelectedDate }) {
   const [isEditing, setIsEditing] = useState(false); 
   const dateInputRef = useRef(null); 
+  const today = new Date().toISOString().split('T')[0]; 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0'); // Ensure two digits
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+  
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
@@ -32,10 +41,11 @@ function DueDate({ selectedDate, setSelectedDate }) {
           value={selectedDate}
           onChange={handleDateChange}
           className={styles.dateInput}
+          min={today}
         />
       ) : (
         <button onClick={handleButtonClick} className={styles.dateButton}>
-          {selectedDate ? selectedDate : 'Select Due Date'}
+          {selectedDate ? formatDate(selectedDate) : 'Select Due Date'}
         </button>
       )}
     </div>

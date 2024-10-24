@@ -6,10 +6,14 @@ import { apiRequest } from '../../Apis';
 
 function AddPeopleToBoard() {
   const [selectedUser, setSelectedUser] = useState(null);
+  const [error,setError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false); // New state to track submission
   const { closeModal, token } = useContext(AppContext);
 
   const SubmitClk = async () => {
+    if(!selectedUser){
+      setError(true);
+    }
     try {
       const response = await apiRequest({
         endpoint: '/secure/shareBoard',
@@ -31,20 +35,21 @@ function AddPeopleToBoard() {
     <div className={styles.container}>
       {isSubmitted ? ( 
         <div className={styles.successMessage}>
-          <h6>{selectedUser.email} added to board!</h6>
-          <button onClick={closeModal}>Okay, got it! </button>
+          <h3>{selectedUser.email} added to board!</h3>
+          <button className={styles.submit} onClick={closeModal}>Okay, got it! </button>
         </div>
       ) : ( 
         <>
           <div className={styles.header}>
-            <h6>Add people to the board</h6>
+            <h3>Add people to the board</h3>
           </div>
           <div className={styles.body}>
             <SearchUser selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+            {error && <p>Please Select a user</p>}
           </div>
           <div className={styles.footer}>
-            <button type='button' onClick={closeModal}>Cancel</button>
-            <button type='submit' onClick={SubmitClk} disabled={!selectedUser}>Add Email</button> {/* Disable button if no user is selected */}
+            <button className={styles.cancel} type='button' onClick={closeModal}>Cancel</button>
+            <button className={styles.submit} type='submit' onClick={SubmitClk} disabled={!selectedUser}>Add Email</button> {/* Disable button if no user is selected */}
           </div>
         </>
       )}

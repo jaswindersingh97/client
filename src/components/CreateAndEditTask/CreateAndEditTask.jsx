@@ -5,20 +5,54 @@ import { Title, DueDate, CheckListAdd, PrioritySelect, SearchUser } from './subC
 import { apiRequest } from '../../Apis';
 
 function CreateAndEditTask() {
-  const { closeModal, token, item, setItem, setTaskData ,taskData} = useContext(AppContext);
-  
-  // Check if it's an edit mode by checking if item exists with an _id
+  const { closeModal, token, item, setItem, setTaskData } = useContext(AppContext);
+  const [error, setError] = useState({});
   const isEdit = !!item?._id;
-
-  // Initialize state with values from `item`, or default values for a new task
   const [title, setTitle] = useState(item?.title || '');
   const [priority, setPriority] = useState(item?.priority || 0);
   const [checklist, setChecklist] = useState(Array.isArray(item?.checklist) ? item.checklist : []);
   const [selectedDate, setSelectedDate] = useState(item?.dueDate || '');
   const [selectedUser, setSelectedUser] = useState(item?.assignedTo?.[0] || "");
 
-  // Function to handle form submission (either create or edit)
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0'); // Ensure two digits
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+  
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!title.trim()) {
+      newErrors.title = "Title is required.";
+    }
+
+    if (!priority) {
+      newErrors.priority = "Priority must be selected.";
+    }
+
+    if (!checklist.length) {
+      newErrors.checklist = "At least one checklist item is required.";
+    } else {
+      checklist.forEach((item, index) => {
+        if (!item.task.trim()) {
+          newErrors[`checklist_${index}`] = `Checklist item ${index + 1} cannot be empty.`;
+        }
+      });
+    }
+
+    setError(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
+
   const onSubmit = async () => {
+    if (!validateForm()) {
+      return; 
+    }
+
     const endpoint = isEdit ? `/secure/editTask/${item._id}` : "/secure/createTask";
     const method = isEdit ? "put" : "post";
 
@@ -28,11 +62,11 @@ function CreateAndEditTask() {
       checklist,
       dueDate: selectedDate,
     };
+    
     if (selectedUser?._id) {
-      data.assignedTo = [selectedUser._id]; // Safely access _id
+      data.assignedTo = [selectedUser._id];
     }
 
-    // Send API request with appropriate method
     const response = await apiRequest({
       endpoint,
       method,
@@ -41,23 +75,17 @@ function CreateAndEditTask() {
       },
       data,
     });
-    
+
     const TaskData = response.data.response;
-    
-    // Update tasks in context
+
     if (isEdit) {
-      // Update the existing task
       setTaskData(prevTasks =>
         prevTasks.map(task => (task._id === TaskData._id ? TaskData : task))
       );
-
     } else {
-      // Add the new task
-      setTaskData(prevTasks => [ TaskData,...prevTasks]);
+      setTaskData(prevTasks => [TaskData, ...prevTasks]);
     }
 
-
-    // Clear the item in context after creation/editing
     setItem(null);
     closeModal();
   };
@@ -66,24 +94,48 @@ function CreateAndEditTask() {
     <div className={styles.container}>
       <div className={styles.body}>
         <Title title={title} setTitle={setTitle} />
+        {error.title && <span className={styles.error}>{error.title}</span>}
+        
         <PrioritySelect priority={priority} setPriority={setPriority} />
-        <div className={styles.SearchUser}><span>Assign to</span><SearchUser selectedUser={selectedUser} setSelectedUser={setSelectedUser} /></div>
+        {error.priority && <span className={styles.error}>{error.priority}</span>}
+        
+        <div className={styles.SearchUser}>
+          <span>Assign to</span>
+          <SearchUser selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+        </div>
+        
         <CheckListAdd checklist={checklist} setChecklist={setChecklist} />
+        {error.checklist && <span className={styles.error}>{error.checklist}</span>}
+        {checklist.map((item, index) => 
+          error[`checklist_${index}`] && (
+            <span className={styles.error} key={index}>
+              {error[`checklist_${index}`]}
+            </span>
+          )
+        )}
       </div>
+      
       <div className={styles.footer}>
         <DueDate selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+        
         <div className={styles.controlbuttons}>
-          <button className={styles.cancelbutton} onClick={
-            ()=>{
-            setItem(null);
-            closeModal()}} type='button'>Cancel</button>
+          <button
+            className={styles.cancelbutton}
+            onClick={() => {
+              setItem(null);
+              closeModal();
+            }}
+            type='button'
+          >
+            Cancel
+          </button>
+          
           <button className={styles.submitbutton} type='submit' onClick={onSubmit}>
             Save
           </button>
         </div>
       </div>
     </div>
-    
   );
 }
 

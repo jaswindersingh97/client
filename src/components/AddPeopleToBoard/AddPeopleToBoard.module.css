@@ -1,0 +1,28 @@
+.container{
+    height: 415px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 665px;
+}
+.footer{
+    margin-top: auto;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.footer button{
+    width: 100%;
+}
+.cancel{
+    border: 1px,solid,#CF3636;
+    color: #CF3636;
+}
+.submit{
+    background-color: #17A2B8;
+    color: white;
+}
+.successMessage{
+    justify-content: center;
+    align-items: center;
+}
