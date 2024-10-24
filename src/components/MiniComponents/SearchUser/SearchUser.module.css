@@ -54,8 +54,9 @@
 }
 .selectedUser{
     display: flex;
-    padding-inline: 2px;
+    padding: 4px;
     background-color: rgb(190, 210, 211);
+    border-radius: 8px;
     gap:10px;
     border: 1px,black,solid;
 }
@@ -64,6 +65,8 @@
     cursor:default;
 }
 .selectedUser span{
-    color: red;
+    width: auto;
+    font-family: cursive;
+    color: #cf3636;
     cursor: pointer;
 }

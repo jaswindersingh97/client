@@ -8,7 +8,6 @@ import generateInitials from '../../../Utils/generateInitials';
 function SearchUser({selectedUser, setSelectedUser}) {
     const [search, setSearch] = useState("");
     const [userList, setUserList] = useState([]);
-    // const [selectedUser, setSelectedUser] = useState(null);
     const { token } = useContext(AppContext);
 
     useEffect(() => {
@@ -41,8 +40,8 @@ function SearchUser({selectedUser, setSelectedUser}) {
 
     const handleAssign = (user) => {
         setSelectedUser(user);
-        setSearch("");  // Clear search input after selecting a user
-        setUserList([]); // Clear user list after selection
+        setSearch("");  
+        setUserList([]); 
     };
 
     const handleRemoveUser = () => {
@@ -55,7 +54,7 @@ function SearchUser({selectedUser, setSelectedUser}) {
                 {selectedUser ? (
                     <div className={styles.selectedUser}>
                         <p>{selectedUser.email}</p>
-                        <span onClick={handleRemoveUser}>x</span>
+                        <span onClick={handleRemoveUser}>X</span>
                     </div>
                 ) : (
                     <>
@@ -70,7 +69,6 @@ function SearchUser({selectedUser, setSelectedUser}) {
                 )}
             </div>
 
-            {/* Only show the body when there is no selected user */}
             {!selectedUser && userList.length > 0 && (
                 <div className={styles.body}>
                     {userList.map((user) => (
