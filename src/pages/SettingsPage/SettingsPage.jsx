@@ -19,30 +19,40 @@ function SettingsPage() {
 
   const handleSubmit = (formData) => {
     const changes = {};
+    let changeCount = 0;
+  
     if (formData.name !== user.name) {
       changes.name = formData.name;
+      changeCount++;
     }
     if (formData.email !== user.email) {
       changes.email = formData.email;
+      changeCount++;
     }
-    const isOldPasswordEntered = formData['Old Password']?.length > 0;
-    const isNewPasswordEntered = formData['New Password']?.length > 0;
+  
+    const isOldPasswordEntered = formData['OldPassword']?.length > 0;
+    const isNewPasswordEntered = formData['NewPassword']?.length > 0;
+    
     if (isOldPasswordEntered && isNewPasswordEntered) {
-      changes.oldPassword = formData['Old Password'];
-      changes.newPassword = formData['New Password'];
+      changes.oldPassword = formData['OldPassword'];
+      changes.newPassword = formData['NewPassword'];
+      changeCount++;
     }
-    const numberOfChanges = Object.keys(changes).length;
-    if (numberOfChanges === 0) {
-      toast.error('No changes were made.')
-      return;
-    }
-    if (numberOfChanges > 1) {
-      toast.error('You can only update one field (either name, email, or password) at a time.');
+  
+    if (changeCount === 0) {
+      toast.error('No changes were made.');
       return;
     }
     
+    if (changeCount > 1) {
+      toast.error('You can only update one field (either name, email, or password) at a time.');
+      return;
+    }
+  
+    // If valid, show alert or proceed to submit the changes
     alert('Form submitted successfully with: ' + JSON.stringify(changes));
   };
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }

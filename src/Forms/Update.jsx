@@ -13,37 +13,43 @@ const fieldConfig = [
     type: 'email',
     avatar: email,
     validate: (value) => /\S+@\S+\.\S+/.test(value),
-    message: 'Invalid email format or empty.',
+    message: 'Invalid email format or left unchanged.',
   },
   {
-    name: 'Old Password',
+    name: 'OldPassword',
     type: 'password',
     avatar: password,
     embeddedAvatar1: hidePassword,
     embeddedAvatar2: unhidePassword,
     validate: (value, formData) => {
-      const newPassword = formData['New Password'];
-      if (value.length > 0 && newPassword.length === 0) {
-        return false; // New password must be present if old password is filled
+      const newPassword = formData?.['NewPassword'] ; // Fetch NewPassword from formData
+      
+      // If either password field is entered, both must be non-empty and meet length requirements
+      if (value.length > 0 || newPassword.value.length > 0) {
+        return value.length >= 6 && newPassword.value.length >= 6; // Both must be >= 6 characters
       }
-      return value.length === 0 || value.length >= 6; // Allow empty or check length
+      
+      return true; // If both are empty, validation passes
     },
-    message: 'Both passwords must be at least 6 characters long or left empty.',
+    message: 'Both Old Password and New Password must be filled and at least 6 characters long.',
   },
   {
-    name: 'New Password',
+    name: 'NewPassword',
     type: 'password',
     avatar: password,
     embeddedAvatar1: hidePassword,
     embeddedAvatar2: unhidePassword,
     validate: (value, formData) => {
-      const oldPassword = formData['Old Password'];
-      if (value.length > 0 && oldPassword.length === 0) {
-        return false; // Old password must be present if new password is filled
+      const oldPassword = formData?.['OldPassword'] ; // Fetch OldPassword from formData
+      
+      // If either password field is entered, both must be non-empty and meet length requirements
+      if (value.length > 0 || oldPassword.length > 0) {
+        return value.length >= 6 && oldPassword.value.length >= 6; // Both must be >= 6 characters
       }
-      return value.length === 0 || value.length >= 6; // Allow empty or check length
+      
+      return true; // If both are empty, validation passes
     },
-    message: 'Both passwords must be at least 6 characters long or left empty.',
+    message: 'Both Old Password and New Password must be filled and at least 6 characters long.',
   }
 ];
 
