@@ -14,40 +14,40 @@ function FormField({ embeddedAvatar1, embeddedAvatar2, avatar, type, name, field
 
   return (
     <>
-    <div className={styles.formField}>
-      {avatar && <img className={styles.imageBefore} src={avatar} alt={`${name} avatar`} />}
-      <input
-        className={styles.TextField}
-        type={inputType} // Use the determined input type
-        value={fieldData.value || ''}
-        onChange={(e) => setFieldData(name, e.target.value)}
-        placeholder={`Enter the ${name}`}
-      />
-      {embeddedAvatar1 && (
-        <img
-          className={styles.embeddedImage}
-          src={currentAvatar} 
-          alt="embedded avatar"
-          onClick={handleTogglePasswordVisibility}
+      <div className={styles.formField}>
+        {avatar && <img className={styles.imageBefore} src={avatar} alt={`${name} avatar`} />}
+        <input
+          className={styles.TextField}
+          type={inputType} // Use the determined input type
+          value={fieldData.value || ''} // Use empty string if value is undefined
+          onChange={(e) => setFieldData(name, e.target.value)}
+          placeholder={`Enter the ${name}`}
         />
-      )}
-    </div>
+        {embeddedAvatar1 && (
+          <img
+            className={styles.embeddedImage}
+            src={currentAvatar} 
+            alt="embedded avatar"
+            onClick={handleTogglePasswordVisibility}
+          />
+        )}
+      </div>
       {fieldData.error && <span className={styles.error}>{fieldData.error}</span>}
     </>
   );
 }
 
-function Form({ fieldConfig,Button }) {
+function Form({ fieldConfig, Button, initialValues }) { // Accept initialValues prop
 
-  const initializeFields = () => {
+  const initializeFields = (initialValues = {}) => { // Accept initial values
     const fields = {};
     fieldConfig.forEach(field => {
-      fields[field.name] = { value: '', error: '' };
+      fields[field.name] = { value: initialValues[field.name] || '', error: '' }; // Populate with initial values if provided
     });
     return fields;
   };
 
-  const [fields, setFields] = useState(initializeFields);
+  const [fields, setFields] = useState(() => initializeFields(initialValues)); // Initialize with initialValues
 
   const setFieldData = (name, value) => {
     setFields(prevFields => ({
@@ -71,7 +71,6 @@ function Form({ fieldConfig,Button }) {
     return Object.keys(newFields).every(field => newFields[field].error === ''); // Return true if no errors
   };
   
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateFields()) {
@@ -85,7 +84,7 @@ function Form({ fieldConfig,Button }) {
   return (
     <div className={styles.Form}>
       <form onSubmit={handleSubmit}>  
-        {fieldConfig.map(({ name, type, avatar,embeddedAvatar1,embeddedAvatar2 }, index) => (
+        {fieldConfig.map(({ name, type, avatar, embeddedAvatar1, embeddedAvatar2 }, index) => (
           <FormField 
             key={index}
             avatar={avatar}
