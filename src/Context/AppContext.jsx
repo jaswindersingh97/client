@@ -12,11 +12,11 @@ const AppProvider = ({ children }) => {
     }
     const [token, setTokenState] = useState(localStorage.getItem('token') || null);
     const setToken = (newToken) => {
-      setTokenState(newToken);            // Update state
+      setTokenState(newToken);            
       if (newToken) {
-        localStorage.setItem('token', newToken); // Set token in localStorage
+        localStorage.setItem('token', newToken);
       } else {
-        localStorage.removeItem('token'); // Remove token from localStorage if null
+        localStorage.removeItem('token'); 
       }
     };
     useEffect(() => {

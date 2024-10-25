@@ -4,9 +4,10 @@ import { fieldConfig } from '../../Forms/Update';
 import Form from '../../components/Form/Form';
 import { AppContext } from './../../Context/AppContext';
 import { toast } from 'react-toastify';
+import { apiRequest } from '../../Apis';
 
 function SettingsPage() {
-  const { getUser, user } = useContext(AppContext);
+  const { getUser, user, token, setToken } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,9 +16,9 @@ function SettingsPage() {
       setIsLoading(false);
     };
     fetchData();
-  }, [getUser]);
+  }, []);
 
-  const handleSubmit = (formData) => {
+  const handleSubmit = async(formData) => {
     const changes = {};
     let changeCount = 0;
   
@@ -50,7 +51,17 @@ function SettingsPage() {
     }
   
     // If valid, show alert or proceed to submit the changes
-    alert('Form submitted successfully with: ' + JSON.stringify(changes));
+    const response = await apiRequest({
+      endpoint:"/secure/updateUser",
+      method:'patch',
+      headers:{
+        'Authorization': `Bearer ${token}`
+      },
+      data:changes,
+    });
+    toast.success(response.data.message);
+    setToken();
+    setTimeout(()=>{window.location.href = '/signIn'},3000);
   };
   
   if (isLoading) {
