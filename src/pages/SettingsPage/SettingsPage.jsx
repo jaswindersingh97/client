@@ -62,8 +62,11 @@ function SettingsPage() {
       data:changes,
     });
     toast.success(response.data.message);
-    setToken();
-    setTimeout(()=>{window.location.href = '/signIn'},3000);
+    if(response.status==200){
+      setToken();
+      setTimeout(()=>{window.location.href = '/signIn'},3000);
+    }
+    
   };
   
   if (isLoading) {
