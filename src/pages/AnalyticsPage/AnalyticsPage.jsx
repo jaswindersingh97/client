@@ -18,14 +18,14 @@ function AnalyticsPage() {
   const {token} = useContext(AppContext);
   const [taskList,setTaskList] = useState([]);
   const Tasks = [
-    { name: "Backlog Tasks", color: "#90C4CC", count: "" },
-    { name: "Low Priority", color: "#63C05B", count: "" },
-    { name: "To-do Tasks", color: "#1E90FF", count: "" },
-    { name: "Moderate Priority", color: "#18B0FF", count: "" },
-    { name: "In-Progress Tasks", color: "#FFA500", count: "" },
-    { name: "High Priority", color: "#FF2473", count: "" },
-    { name: "Completed Tasks", color: "#32CD32", count: "" },
-    { name: "Due Date Tasks", color: "#CF3636", count: "" }
+    { name: "Backlog Tasks", color: "#90C4CC", count: "Loading" },
+    { name: "Low Priority", color: "#63C05B", count: "Loading" },
+    { name: "To-do Tasks", color: "#1E90FF", count: "Loading" },
+    { name: "Moderate Priority", color: "#18B0FF", count: "Loading" },
+    { name: "In-Progress Tasks", color: "#FFA500", count: "Loading" },
+    { name: "High Priority", color: "#FF2473", count: "Loading" },
+    { name: "Completed Tasks", color: "#32CD32", count: "Loading" },
+    { name: "Due Date Tasks", color: "#CF3636", count: "Loading" }
   ];
   useEffect(() => {
     getTasks();
