@@ -22,7 +22,6 @@ function SignIn() {
       toast.success(message);
       setTimeout(() => {
         window.location.href = '/dashboard';
-        // navigate('/dashboard');
       }, 3000); 
     } 
     else if (error) {
