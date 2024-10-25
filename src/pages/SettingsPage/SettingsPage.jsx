@@ -12,7 +12,9 @@ function SettingsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getUser();
+      if (!user) {
+        await getUser();
+      }
       setIsLoading(false);
     };
     fetchData();
