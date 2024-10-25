@@ -3,15 +3,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import { fieldConfig } from '../../Forms/Update';
 import Form from '../../components/Form/Form';
 import { AppContext } from './../../Context/AppContext';
+import { toast } from 'react-toastify';
 
 function SettingsPage() {
   const { getUser, user } = useContext(AppContext);
-  const [isLoading, setIsLoading] = useState(true); // To track loading state
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       await getUser();
-      setIsLoading(false); // Set loading to false after fetching user
+      setIsLoading(false);
     };
     fetchData();
   }, [getUser]);
@@ -32,13 +33,14 @@ function SettingsPage() {
     }
     const numberOfChanges = Object.keys(changes).length;
     if (numberOfChanges === 0) {
-      alert('No changes were made.');
+      toast.error('No changes were made.')
       return;
     }
     if (numberOfChanges > 1) {
-      alert('You can only update one field (either name, email, or password) at a time.');
+      toast.error('You can only update one field (either name, email, or password) at a time.');
       return;
     }
+    
     alert('Form submitted successfully with: ' + JSON.stringify(changes));
   };
   if (isLoading) {
@@ -71,5 +73,4 @@ function SettingsPage() {
     </div>
   );
 }
-
 export default SettingsPage;
