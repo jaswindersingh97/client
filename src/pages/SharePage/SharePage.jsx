@@ -19,7 +19,7 @@ function SharePage() {
       setTask(response);
     } else {
       toast.error("Please check the link again");
-      setTask(null); // Set to null if no task is found
+      setTask(null); 
     }
   };
 
@@ -82,7 +82,7 @@ function SharePage() {
           </div>
         </div>
       ) : (
-        <p>Task not found or unavailable.</p>
+        <p>Loading</p>
       )}
     </div>
   );
