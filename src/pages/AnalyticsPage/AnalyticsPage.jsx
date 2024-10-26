@@ -17,7 +17,7 @@ function Item({ item }) {
 function AnalyticsPage() {
   const { token } = useContext(AppContext);
   const [taskList, setTaskList] = useState([]);
-  const [loading, setLoading] = useState(true); // Initialize loading state
+  const [loading, setLoading] = useState(true); 
 
   const Tasks = [
     { name: "Backlog Tasks", color: "#90C4CC", count: 0 },
@@ -47,13 +47,11 @@ function AnalyticsPage() {
       setTaskList(response.data.response);
     } catch (error) {
       console.error("Error fetching tasks:", error);
-      // Handle error accordingly, e.g., set an error state
     } finally {
-      setLoading(false); // End loading
+      setLoading(false);
     }
   };
 
-  // Calculate task counts based on taskList
   taskList.forEach(task => {
     if (task.status === 1) {
       Tasks[2].count++;
