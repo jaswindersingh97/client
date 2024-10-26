@@ -4,6 +4,7 @@ import { AppContext } from '../../Context/AppContext';
 import { apiRequest } from '../../Apis';
 import { statuses } from '../../ComponentUtils/Statuses';
 import styles from './CardGrid.module.css';
+import { toast } from 'react-toastify';
 
 function CardGrid() {
   const { selectedValue, token, taskData, setTaskData } = useContext(AppContext);
@@ -20,7 +21,7 @@ function CardGrid() {
         'Authorization': `Bearer ${token}`,
       },
     });
-    setTaskData(response.data.response || []); // Ensure taskData is an array
+    setTaskData(response.data.response || []);
   };
 
   const updateTaskStatus = async (taskId, newStatus) => {
@@ -40,6 +41,7 @@ function CardGrid() {
         task._id === taskId ? { ...task, status: newStatus } : task
       )
     );
+    toast.success("The Task status changed successfully");
   };
 
   const updateTaskChecklist = (taskId, updatedChecklist) => {
@@ -50,7 +52,6 @@ function CardGrid() {
     );
   };
 
-  // Memoize tasksByStatus to recalculate only when taskData changes
   const tasksByStatus = useMemo(() => {
     return statuses.reduce((acc, status) => {
       acc[status.id] = taskData.filter(task => task.status === status.id);

@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { AppContext } from '../../Context/AppContext';
 import { Title, DueDate, CheckListAdd, PrioritySelect, SearchUser } from './subComponents/index';
 import { apiRequest } from '../../Apis';
+import { toast } from 'react-toastify';
 
 function CreateAndEditTask() {
   const { closeModal, token, item, setItem, setTaskData } = useContext(AppContext);
@@ -61,6 +62,7 @@ function CreateAndEditTask() {
       priority,
       checklist,
       dueDate: selectedDate,
+      assignedTo: []
     };
     
     if (selectedUser?._id) {
@@ -75,7 +77,6 @@ function CreateAndEditTask() {
       },
       data,
     });
-
     const TaskData = response.data.response;
 
     if (isEdit) {
@@ -88,6 +89,7 @@ function CreateAndEditTask() {
 
     setItem(null);
     closeModal();
+    toast.success(response.data.message);
   };
 
   return (

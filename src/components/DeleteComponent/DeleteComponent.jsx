@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { apiRequest } from '../../Apis';
 import { AppContext } from '../../Context/AppContext';
 import styles from './DeleteComponent.module.css';
@@ -14,10 +15,10 @@ function DeleteComponent() {
     const response = await apiRequest({endpoint:`/secure/deleteTask/${deleteId}`,method:"delete",headers:{
       'Authorization':`Bearer ${token}`
     }});
-    console.log(response);
     
     setDeleteId(null); 
     closeModal();
+    toast.success("Task deleted successfully");
   };
 
   const handleCancel = () => {
