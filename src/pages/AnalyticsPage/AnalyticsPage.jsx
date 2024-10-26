@@ -19,15 +19,15 @@ function AnalyticsPage() {
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true); 
 
-  const Tasks = [
-    { name: "Backlog Tasks", color: "#90C4CC", count: 0 },
-    { name: "Low Priority", color: "#63C05B", count: 0 },
-    { name: "To-do Tasks", color: "#1E90FF", count: 0 },
-    { name: "Moderate Priority", color: "#18B0FF", count: 0 },
-    { name: "In-Progress Tasks", color: "#FFA500", count: 0 },
-    { name: "High Priority", color: "#FF2473", count: 0 },
-    { name: "Completed Tasks", color: "#32CD32", count: 0 },
-    { name: "Due Date Tasks", color: "#CF3636", count: 0 }
+  const initialTasks = [
+    { name: "Backlog Tasks", color: "#90C4CC", count: 0, key: 'statusCount', value: 3 },
+    { name: "Low Priority", color: "#63C05B", count: 0, key: 'priorityCount', value: 1 },
+    { name: "To-do Tasks", color: "#1E90FF", count: 0, key: 'statusCount', value: 1 },
+    { name: "Moderate Priority", color: "#18B0FF", count: 0, key: 'priorityCount', value: 2 },
+    { name: "In-Progress Tasks", color: "#FFA500", count: 0, key: 'statusCount', value: 2 },
+    { name: "High Priority", color: "#FF2473", count: 0, key: 'priorityCount', value: 3 },
+    { name: "Completed Tasks", color: "#32CD32", count: 0, key: 'statusCount', value: 4 },
+    { name: "Due Date Tasks", color: "#CF3636", count: 0, key: 'dueDateCount', value: 'hasDueDate' }
   ];
 
   useEffect(() => {
@@ -38,41 +38,30 @@ function AnalyticsPage() {
     setLoading(true); // Start loading
     try {
       const response = await apiRequest({
-        endpoint: `/secure/getTasks`,
+        endpoint: `/secure/Analytics`,
         method: 'get',
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
-      setTaskList(response.data.response);
+      const counts = response.data.counts[0];  // Fetch the counts object
+
+      // Map the API response to update the counts in initialTasks
+      const updatedTasks = initialTasks.map(task => {
+        const countData = counts[task.key]?.find(item => item._id === task.value);
+        return {
+          ...task,
+          count: countData ? countData.count : 0,  // Set the count or default to 0
+        };
+      });
+
+      setTaskList(updatedTasks);  // Update taskList with new values
     } catch (error) {
       console.error("Error fetching tasks:", error);
     } finally {
       setLoading(false);
     }
   };
-
-  taskList.forEach(task => {
-    if (task.status === 1) {
-      Tasks[2].count++;
-    } else if (task.status === 2) {
-      Tasks[4].count++; 
-    } else if (task.status === 3) {
-      Tasks[0].count++; 
-    } else if (task.status === 4) {
-      Tasks[6].count++; 
-    }
-    if (task.priority === 1) {
-      Tasks[1].count++;
-    } else if (task.priority === 2) {
-      Tasks[3].count++;
-    } else if (task.priority === 3) {
-      Tasks[5].count++;
-    }
-    if (task.dueDate) {
-      Tasks[7].count++;
-    }    
-  });
 
   return (
     <div className={styles.container}>
@@ -83,7 +72,7 @@ function AnalyticsPage() {
         {loading ? ( // Conditional rendering based on loading state
           <p>Loading...</p>
         ) : (
-          Tasks.map((item, index) => (
+          taskList.map((item, index) => (
             <Item item={item} key={index} />
           ))
         )}
